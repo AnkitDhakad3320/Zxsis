@@ -1,5 +1,6 @@
 // SwiperComponent.js
 import React, { useEffect } from 'react';
+import "./Home/Home.css"
 
 const SwiperComponent = () => {
     useEffect(() => {
@@ -13,9 +14,11 @@ const SwiperComponent = () => {
             const script = document.createElement('script');
             script.src = 'https://cdn.jsdelivr.net/npm/swiper@latest/swiper-bundle.min.js';
             script.onload = () => {
+
+                
                 // Initialize Swiper after the script loads
                 new window.Swiper('.mySwiper', {
-                    slidesPerView: 1,
+                    slidesPerView: 2,
                     spaceBetween: 50,
                     loop: true,
                     grabCursor: true,
@@ -90,8 +93,8 @@ const SwiperComponent = () => {
             </div>
             {/* Pagination and Navigation */}
             <div className="swiper-pagination"></div>
-            <div className="swiper-button-prev">Prev</div>
-            <div className="swiper-button-next">Next</div>
+            <div className="swiper-button-prev swipe-left"></div>
+            <div className="swiper-button-next swipe-right"></div>
         </div>
     );
 };

@@ -100,10 +100,12 @@ background: url("../images/image.jpg") lightgray -10.444px 0px / 172.779% 100% n
     height: 706px;
     gap: 24px;
     margin: 24px;
+    /* padding: 24px; */
     text-align: left;
 
 }
 .our-team-container{
+    height: 707.6px;
     display: flex;
 padding: 96px 84px;
 flex-direction: column;

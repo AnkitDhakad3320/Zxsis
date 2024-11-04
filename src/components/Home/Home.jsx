@@ -1,19 +1,43 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect , useRef } from "react";
 // import ScrollReveal from 'scrollreveal';
-import SwiperComponent from "../swiper";
+// import SwiperComponent from "../swiper";
 import { Link } from "react-router-dom";
+
+
+
 
 import "../../App.css";
 import "./Home.css";
 import { ReactComponent as Symbol } from "../images/Symbol.svg";
 import { ReactComponent as Flogo } from "../images/Footer-logo.svg";
+import { ReactComponent as Palette } from "../images/palette-line.svg";
+import { ReactComponent as Text } from "../images/text.svg";
+import { ReactComponent as Contrast } from "../images/contrast-2-line.svg";
+import { ReactComponent as AlignItem } from "../images/align-item-left-line.svg";
+import { ReactComponent as ArrowLeft } from "../images/align-item-left-line.svg";
+import { ReactComponent as ArrowRight } from "../images/arrow-right-s-line.svg";
+import { ReactComponent as AddCircle } from "../images/add-circle-fill.svg";
+import { ReactComponent as CloseCircle } from "../images/close-circle-fill.svg";
+import { ReactComponent as Instagram } from "../images/instagram-line.svg";
+import { ReactComponent as Linkedin } from "../images/linkedin-line.svg";
+import { ReactComponent as Twitter } from "../images/twitter-x-line (1).svg";
+import { ReactComponent as Dribbble } from "../images/dribbble-line.svg";
+
 import Lottie from "lottie-react";
 import Animation from "../images/camera-hover-flash.json";
 import UiUx from "../images/video-conference-hover-pinch.json";
 import Saas from "../images/blinking.json";
 import Zx from "../images/zxsis (1).json";
-// import { Toggle } from "../Toggle";
+
 import ThemeToggle from '../Toggle';
+
+import image1 from '../images/image.png';
+import image2 from '../images/image (1).png';
+import image3 from '../images/image (2).png';
+import image4 from '../images/image (3).png';
+import image5 from '../images/image.jpg';
+
+
 
 export const Nav = function () {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -75,20 +99,16 @@ export const Nav = function () {
 
 // =============================   HEADER  ===================================================
 
-export const Header = () => {
+export function Header  ({head ,subhead, button}) {
   return (
     <header className="app-header">
       <div>
-        Transform Your Online
-        <br></br> Identity with<span> Innovative</span>
-        <br></br>
-        and <span>Dynamic</span> Design
+        {head}
       </div>
       <p>
-        Let us bring your vision to life with stunning visuals that engage and
-        inspire!
+        {subhead}
       </p>
-      <button> Explore Our Services</button>
+      <button>{button} </button>
     </header>
   );
 };
@@ -117,6 +137,37 @@ export function AboutSection({ heading, subheading, content, imageUrl }) {
   );
 }
 
+
+// ==================================DATA====================================================
+
+
+const cardData = [
+  {
+    icon: <Palette/>,
+    title: "Color System",
+    description:
+      "A massively versatile colour system based on the popular UI library palette.",
+  },
+  {
+    icon: <Text/>,
+    title: "Typography",
+    description:
+      "Elegant typography that enhances readability and user experience.",
+  },
+  {
+    icon: <Contrast/>,
+    title: "Spacing System",
+    description:
+      "A comprehensive spacing system to ensure consistency in layout.",
+  },
+  {
+    icon: <AlignItem/>,
+    title: "Iconography",
+    description: "A well-designed icon set to improve visual communication.",
+  },
+];
+
+
 // ==========================================SECTION===================================================
 
 export const Section = ({ title, subtitle, cards }) => {
@@ -130,7 +181,7 @@ export const Section = ({ title, subtitle, cards }) => {
       <div className="card-container">
         {cards.map((item, index) => (
           <div className="section-card" key={index}>
-            <span className={`icon ${item.icon}`}></span>{" "}
+            <span className={`icon ${item.icon}`}>{item.icon} </span>{" "}
             {/*  CSS classes for icons */}
             <div className="card-text">
               <h3>{item.title}</h3>
@@ -177,7 +228,7 @@ const serviceData = [
 
 // -----------------------SERVICES---------------------------------------
 
-export const Services = () => {
+export const OurServices = () => {
   return (
     <div className="services">
       <div className="services-header">
@@ -189,7 +240,7 @@ export const Services = () => {
           {serviceData.map((service, index) => (
             <div className="services-card" key={index}>
               <div className="services-card-icon">
-                <Lottie animationData={service.icon} />
+                <Lottie className="servicesIcon" animationData={service.icon} />
               </div>
               <h3>{service.title}</h3>
               <ul className="services-card-text">
@@ -208,11 +259,11 @@ export const Services = () => {
 // ============================DATA===========================================================
 
 const portfolioData = [
-  { id: 1, image: "path/to/image1.jpg", title: "Project 1" },
-  { id: 2, image: "path/to/image2.jpg", title: "Project 2" },
-  { id: 3, image: "path/to/image3.jpg", title: "Project 3" },
-  { id: 4, image: "path/to/image4.jpg", title: "Project 4" },
-  { id: 5, image: "path/to/image5.jpg", title: "Project 5" },
+  { id: 1, image: image1, title: "Project 1" },
+  { id: 2, image: image2, title: "Project 2" },
+  { id: 3, image: image3, title: "Project 3" },
+  { id: 4, image: image4, title: "Project 4" },
+  { id: 5, image: image5, title: "Project 5" },
   { id: 6, image: "path/to/image6.jpg", title: "Project 6" },
   { id: 7, image: "path/to/image7.jpg", title: "Project 7" },
   { id: 8, image: "path/to/image8.jpg", title: "Project 8" },
@@ -240,8 +291,10 @@ export const Portfolio = () => {
               src={item.image}
               alt={item.title}
               className="portfolio-image"
+              onError={(e) => { e.target.src = './assets/default.jpg'; }} // Optional fallback image
             />
-            <h3>{item.title}</h3>
+            {/* <h3>{item.title}</h3> */}
+          
           </div>
         ))}
       </div>
@@ -320,25 +373,142 @@ const testimonials = [
 
 //=============================TESTIMONIAL=================================================
 
-export const Testimonial = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+// export const Testimonial = () => {
+//   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const nextTestimonials = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex + 2 < testimonials.length ? prevIndex + 2 : 0
-    );
-  };
+//   const nextTestimonials = () => {
+//     setCurrentIndex((prevIndex) =>
+//       prevIndex + 2 < testimonials.length ? prevIndex + 2 : 0
+//     );
+//   };
 
-  const prevTestimonials = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex - 2 >= 0 ? prevIndex - 2 : testimonials.length - 2
-    );
-  };
+//   const prevTestimonials = () => {
+//     setCurrentIndex((prevIndex) =>
+//       prevIndex - 2 >= 0 ? prevIndex - 2 : testimonials.length - 2
+//     );
+//   };
+
+//   useEffect(() => {
+//     const interval = setInterval(nextTestimonials, 2000);
+//     return () => clearInterval(interval);
+//   }, [currentIndex]);
+
+//   return (
+//     <div className="testimonial-container">
+//       <div className="testimonial-header">
+//         What our <br />
+//         <span>Satisfied clients</span> say
+//       </div>
+//       <div className="testimonial-card-container">
+//         <div className="testimonial-cards">
+//           {testimonials
+//             .slice(currentIndex, currentIndex + 2)
+//             .map((testimonial) => (
+//               <div className="testimonial-card" key={testimonial.id}>
+//                 <span>
+//                   <svg
+//                     xmlns="http://www.w3.org/2000/svg"
+//                     width="48"
+//                     height="40"
+//                     viewBox="0 0 48 40"
+//                     fill="none"
+//                   >
+//                     <path
+//                       d="M9.68264 40C7.03714 40 4.762 38.9418 2.85724 36.8254C0.95248 34.709 9.91821e-05 31.9577 9.91821e-05 28.5714C9.91821e-05 24.9735 0.793747 21.2698 2.38105 17.4603C3.86253 13.7566 5.92603 10.3704 8.57153 7.30159C11.217 4.2328 14.2329 1.79894 17.6191 0L21.4287 7.14286C18.7832 9.15344 16.6139 11.164 14.9207 13.1746C13.1218 15.1852 11.9578 17.7249 11.4287 20.7936C13.4393 20.8995 15.2911 21.9048 16.9842 23.8095C18.5715 25.8201 19.3652 27.9894 19.3652 30.3175C19.3652 31.9048 18.9419 33.4392 18.0953 34.9206C17.143 36.4021 15.926 37.619 14.4445 38.5714C12.9631 39.5238 11.3758 40 9.68264 40ZM36.0318 40C33.3863 40 31.1112 38.9418 29.2064 36.8254C27.1959 34.709 26.1906 31.9577 26.1906 28.5714C26.1906 24.9735 26.9842 21.2698 28.5715 17.4603C30.1588 13.7566 32.2752 10.3704 34.9207 7.30159C37.5662 4.2328 40.5821 1.79894 43.9683 0L47.6191 7.14286C45.0795 9.15344 42.9631 11.164 41.2699 13.1746C39.471 15.1852 38.3599 17.7249 37.9366 20.7936C39.2064 20.8995 40.4234 21.3757 41.5874 22.2222C42.7514 23.1746 43.7567 24.3915 44.6033 25.873C45.344 27.3545 45.7144 28.836 45.7144 30.3175C45.7144 31.9048 45.2911 33.4392 44.4445 34.9206C43.4922 36.4021 42.2752 37.619 40.7937 38.5714C39.3123 39.5238 37.725 40 36.0318 40Z"
+//                       fill="#63C5EA"
+//                     />
+//                   </svg>
+//                 </span>
+//                 <div className="testimonial-card-text">
+//                   <div className="testimonial-text-head">
+//                     {testimonial.quote}
+//                   </div>
+//                   <div className="testimonial-text-para">
+//                     {testimonial.text}
+//                   </div>
+//                   <div className="testimonial-detail">
+//                     <div
+//                       className="testimonial-details-image"
+//                       style={{ backgroundImage: `url(${testimonial.image})` }}
+//                     ></div>
+//                     <div className="testimonial-details-name">
+//                       <h4>{testimonial.name}</h4>
+//                       <h5>{testimonial.location}</h5>
+//                     </div>
+//                   </div>
+//                 </div>
+
+//                 {/* <div className="vertical-rule"></div> */}
+
+//               </div>
+              
+//             ))}
+
+//         </div>
+//       </div>
+//       <div className="slider">
+//         <div className="swipe-left " onClick={prevTestimonials}>
+//           &lt;
+//         </div>
+//         <div className="dot swiper-pagination"></div> 
+//         <div className="swipe-right " onClick={nextTestimonials}>
+//           &gt;
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+
+
+
+
+
+export  const Testimonial = () => {
+  const swiperRef = useRef(null);
 
   useEffect(() => {
-    const interval = setInterval(nextTestimonials, 5000);
-    return () => clearInterval(interval);
-  }, [currentIndex]);
+    const loadSwiper = () => {
+      const cssLink = document.createElement('link');
+      cssLink.rel = 'stylesheet';
+      cssLink.href = 'https://cdn.jsdelivr.net/npm/swiper@latest/swiper-bundle.min.css';
+      document.head.appendChild(cssLink);
+
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/swiper@latest/swiper-bundle.min.js';
+      script.onload = () => {
+        swiperRef.current = new window.Swiper('.mySwiper', {
+          slidesPerView: 2,
+          loop: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+
+        // Automatic slide transition
+        const interval = setInterval(() => {
+          swiperRef.current.slideNext();
+        }, 3000);
+
+        return () => clearInterval(interval);
+      };
+      document.body.appendChild(script);
+    };
+
+    loadSwiper();
+
+    return () => {
+      const swiperScript = document.querySelector('script[src="https://cdn.jsdelivr.net/npm/swiper@latest/swiper-bundle.min.js"]');
+      if (swiperScript) {
+        document.body.removeChild(swiperScript);
+      }
+    };
+  }, []);
 
   return (
     <div className="testimonial-container">
@@ -346,69 +516,64 @@ export const Testimonial = () => {
         What our <br />
         <span>Satisfied clients</span> say
       </div>
-      <div className="testimonial-card-container">
-        <div className="testimonial-cards">
-          {testimonials
-            .slice(currentIndex, currentIndex + 2)
-            .map((testimonial) => (
-              <div className="testimonial-card" key={testimonial.id}>
-                <span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="48"
-                    height="40"
-                    viewBox="0 0 48 40"
-                    fill="none"
-                  >
-                    <path
-                      d="M9.68264 40C7.03714 40 4.762 38.9418 2.85724 36.8254C0.95248 34.709 9.91821e-05 31.9577 9.91821e-05 28.5714C9.91821e-05 24.9735 0.793747 21.2698 2.38105 17.4603C3.86253 13.7566 5.92603 10.3704 8.57153 7.30159C11.217 4.2328 14.2329 1.79894 17.6191 0L21.4287 7.14286C18.7832 9.15344 16.6139 11.164 14.9207 13.1746C13.1218 15.1852 11.9578 17.7249 11.4287 20.7936C13.4393 20.8995 15.2911 21.9048 16.9842 23.8095C18.5715 25.8201 19.3652 27.9894 19.3652 30.3175C19.3652 31.9048 18.9419 33.4392 18.0953 34.9206C17.143 36.4021 15.926 37.619 14.4445 38.5714C12.9631 39.5238 11.3758 40 9.68264 40ZM36.0318 40C33.3863 40 31.1112 38.9418 29.2064 36.8254C27.1959 34.709 26.1906 31.9577 26.1906 28.5714C26.1906 24.9735 26.9842 21.2698 28.5715 17.4603C30.1588 13.7566 32.2752 10.3704 34.9207 7.30159C37.5662 4.2328 40.5821 1.79894 43.9683 0L47.6191 7.14286C45.0795 9.15344 42.9631 11.164 41.2699 13.1746C39.471 15.1852 38.3599 17.7249 37.9366 20.7936C39.2064 20.8995 40.4234 21.3757 41.5874 22.2222C42.7514 23.1746 43.7567 24.3915 44.6033 25.873C45.344 27.3545 45.7144 28.836 45.7144 30.3175C45.7144 31.9048 45.2911 33.4392 44.4445 34.9206C43.4922 36.4021 42.2752 37.619 40.7937 38.5714C39.3123 39.5238 37.725 40 36.0318 40Z"
-                      fill="#63C5EA"
-                    />
-                  </svg>
-                </span>
-                <div className="testimonial-card-text">
-                  <div className="testimonial-text-head">
-                    {testimonial.quote}
-                  </div>
-                  <div className="testimonial-text-para">
-                    {testimonial.text}
-                  </div>
-                  <div className="testimonial-detail">
-                    <div
-                      className="testimonial-details-image"
-                      style={{ backgroundImage: `url(${testimonial.image})` }}
-                    ></div>
-                    <div className="testimonial-details-name">
-                      <h4>{testimonial.name}</h4>
-                      <h5>{testimonial.location}</h5>
-                    </div>
+      <div className="swiper mySwiper">
+        <div className="swiper-wrapper">
+          {testimonials.map((testimonial) => (
+            <div className="swiper-slide testimonial-card" key={testimonial.id}>
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="48"
+                  height="40"
+                  viewBox="0 0 48 40"
+                  fill="none"
+                >
+                  <path
+                    d="M9.68264 40C7.03714 40 4.762 38.9418 2.85724 36.8254C0.95248 34.709 9.91821e-05 31.9577 9.91821e-05 28.5714C9.91821e-05 24.9735 0.793747 21.2698 2.38105 17.4603C3.86253 13.7566 5.92603 10.3704 8.57153 7.30159C11.217 4.2328 14.2329 1.79894 17.6191 0L21.4287 7.14286C18.7832 9.15344 16.6139 11.164 14.9207 13.1746C13.1218 15.1852 11.9578 17.7249 11.4287 20.7936C13.4393 20.8995 15.2911 21.9048 16.9842 23.8095C18.5715 25.8201 19.3652 27.9894 19.3652 30.3175C19.3652 31.9048 18.9419 33.4392 18.0953 34.9206C17.143 36.4021 15.926 37.619 14.4445 38.5714C12.9631 39.5238 11.3758 40 9.68264 40ZM36.0318 40C33.3863 40 31.1112 38.9418 29.2064 36.8254C27.1959 34.709 26.1906 31.9577 26.1906 28.5714C26.1906 24.9735 26.9842 21.2698 28.5715 17.4603C30.1588 13.7566 32.2752 10.3704 34.9207 7.30159C37.5662 4.2328 40.5821 1.79894 43.9683 0L47.6191 7.14286C45.0795 9.15344 42.9631 11.164 41.2699 13.1746C39.471 15.1852 38.3599 17.7249 37.9366 20.7936C39.2064 20.8995 40.4234 21.3757 41.5874 22.2222C42.7514 23.1746 43.7567 24.3915 44.6033 25.873C45.344 27.3545 45.7144 28.836 45.7144 30.3175C45.7144 31.9048 45.2911 33.4392 44.4445 34.9206C43.4922 36.4021 42.2752 37.619 40.7937 38.5714C39.3123 39.5238 37.725 40 36.0318 40Z"
+                    fill="#63C5EA"
+                  />
+                </svg>
+              </span>
+              <div className="testimonial-card-text">
+                <div className="testimonial-text-head">
+                  {testimonial.quote}
+                </div>
+                <div className="testimonial-text-para">
+                  {testimonial.text}
+                </div>
+                <div className="testimonial-detail">
+                  <div
+                    className="testimonial-details-image"
+                    style={{ backgroundImage: `url(${testimonial.image})` }}
+                  ></div>
+                  <div className="testimonial-details-name">
+                    <h4>{testimonial.name}</h4>
+                    <h5>{testimonial.location}</h5>
                   </div>
                 </div>
-
-                {/* <div className="vertical-rule"></div> */}
-
               </div>
-              
-            ))}
-
+            </div>
+          ))}
         </div>
-      </div>
-      <div className="slider">
-        <div className="swipe-left" onClick={prevTestimonials}>
-          &lt;
+        {/* Pagination and Navigation */}
+        <div className="swiperArrow">
+        <div className="swiper-pagination"></div>
+        <div className="swiper-button-prev swipe-left"><ArrowLeft/> </div>
+        <div className="swiper-button-next swipe-right"><ArrowRight/> </div>
         </div>
-        <div className="dot"></div>
-        <div className="dot"></div>
-        <div className="dot"></div>
-        <div className="swipe-right" onClick={nextTestimonials}>
-          &gt;
-        </div>
+        
       </div>
     </div>
   );
 };
 
-// ======================================================================================
+
+
+
+
+
+
+// ======================================Data================================================
 
 const faqs = [
   {
@@ -439,7 +604,7 @@ const FaqCard = ({ question, answer, isOpen, onToggle }) => (
   <div className="faq-card">
     <div className="faq-slide" onClick={onToggle}>
       <div className="faq-card-text">{question}</div>
-      <div className="faq-card-icon">{isOpen ? "-" : "+"}</div>
+      <div className="faq-card-icon">{isOpen ? <CloseCircle/> : <AddCircle/>}</div>
     </div>
     {isOpen && (
       <div className="faq-open">
@@ -542,7 +707,7 @@ const Modal = ({ isOpen, onClose, onSend }) => {
             <p>You can reach us any time</p>
           </div>
           <button className="cross" onClick={onClose}>
-            X
+            <CloseCircle/>
           </button>
         </div>
         <div className="full-name">
@@ -598,7 +763,7 @@ const Modal = ({ isOpen, onClose, onSend }) => {
             required
           />
         </label>
-        <button onClick={handleSend}>Send</button>
+        <button className="sendButton" onClick={handleSend}>Send</button>
       </div>
     </div>
   );
@@ -628,7 +793,7 @@ export const Footer = () => {
               <Flogo />
             </div>
             <div className="flogo-text">ZXSIS</div>
-            <ThemeToggle />
+            <ThemeToggle/>
           </div>
           <div className="footer-text">
             <p>
@@ -662,6 +827,7 @@ export const Footer = () => {
               rel="noopener noreferrer"
               className="link"
             >
+            <Instagram/>
               Instagram
             </a>
             <a
@@ -670,6 +836,7 @@ export const Footer = () => {
               rel="noopener noreferrer"
               className="link"
             >
+            <Linkedin/>
               LinkedIn
             </a>
             <a
@@ -678,6 +845,7 @@ export const Footer = () => {
               rel="noopener noreferrer"
               className="link"
             >
+            <Twitter/>
               Twitter
             </a>
             <a
@@ -686,6 +854,7 @@ export const Footer = () => {
               rel="noopener noreferrer"
               className="link"
             >
+            <Dribbble/>
               Dribble
             </a>
           </div>
@@ -694,35 +863,6 @@ export const Footer = () => {
     </div>
   );
 };
-
-// ==================================DATA====================================================
-
-
-const cardData = [
-  {
-    icon: "ico1",
-    title: "Color System",
-    description:
-      "A massively versatile colour system based on the popular UI library palette.",
-  },
-  {
-    icon: "ico2",
-    title: "Typography",
-    description:
-      "Elegant typography that enhances readability and user experience.",
-  },
-  {
-    icon: "ico3",
-    title: "Spacing System",
-    description:
-      "A comprehensive spacing system to ensure consistency in layout.",
-  },
-  {
-    icon: "ico4",
-    title: "Iconography",
-    description: "A well-designed icon set to improve visual communication.",
-  },
-];
 
 
 
@@ -752,7 +892,11 @@ export const Home = () => {
         <nav className="navbar">
           <Nav />
         </nav>
-        <Header />
+        <Header 
+          head=<div>Transform Your Online <br></br> Identity with<span> Innovative</span> <br></br> and <span>Dynamic</span> Design</div>
+          subhead="Let us bring your vision to life with stunning visuals that engage and inspire!"
+          button="Explore Our Services"
+        />
         <AboutSection
           heading="About Us"
           subheading="At Zxsis"
@@ -768,10 +912,9 @@ export const Home = () => {
           subtitle="We've got you covered."
           cards={cardData}
         />
-        <Services />
+        <OurServices />
         <Portfolio />
         <Testimonial />
-        <SwiperComponent/>
         <Faq />
         <Footer />
       </div>

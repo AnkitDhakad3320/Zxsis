@@ -1,16 +1,15 @@
 import { Footer, Nav } from "../Home/Home"
 import "../../App.css";
 import "./About.css";
+import TestimonialsSwiper from '../DarkMode';
 
 
-
-
-export const Welcome = () => {
+export const Welcome = ({quote , header ,greet}) => {
     return (
         <div className="welcome">
-        <div className="about-greet">Welcome to Zxsis</div>
-        <div className="about-tagline">Where our <span>Passion for design</span>  meets our <br/> commitment to delivering <span>Impactful results.</span> </div>
-        <div className="about-greet-text">We believe that great design is not just about aesthetics; it’s about creating <br/> meaningful experiences that resonate with users and drive business success.</div>
+        <div className="about-greet">{quote}</div>
+        <div className="about-tagline">{header} </div>
+        <div className="about-greet-text">{greet}</div>
         </div>
     )
 }
@@ -80,10 +79,15 @@ export const About = ()=>{
     return (
         <div className="About">
             <Nav/>
-            <Welcome/>
+            <Welcome
+                quote={"Welcome to Zxsis"}
+                header={<div>Where our <span>Passion for design</span>  meets our <br/> commitment to delivering <span>Impactful results.</span></div>}
+                greet={<div>We believe that great design is not just about aesthetics; it’s about creating <br/> meaningful experiences that resonate with users and drive business success.</div>}
+            />
             <AboutSec/>
             <OurTeam/>
             <Lastabout/>
+            <TestimonialsSwiper/>
             <Footer/>
         </div>
     )
