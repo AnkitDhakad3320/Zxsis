@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 
 
-import "../../App.css";
+// import "../../App.css";
 import "./Home.css";
 import { ReactComponent as Symbol } from "../images/Symbol.svg";
 import { ReactComponent as Flogo } from "../images/Footer-logo.svg";
@@ -46,13 +46,51 @@ export const Nav = function () {
     setModalOpen(true);
   };
 
-  const handleSendEmail = (email, subject, question) => {
-    // Here you would typically send the email using an API or service
-    console.log(
-      `Sending email to: ${email},Subject: ${subject} , Question: ${question}`
-    );
-    // Reset form state if needed
-  };
+  // import axios from 'axios';
+
+const handleSendEmail = async (subject, question) => {
+  if (!subject || !question) {
+    console.error('All fields must be filled out');
+    return;
+  }
+
+  try {
+    // Send request to your backend server with fixed email
+    // const response = await fetch.post('http://localhost:5000/send-email', {
+    //   email: 'ankitdhakad4801@gmail.com', // Hardcoded recipient email
+    //   subject,
+    //   question,
+    // });
+    const response = await fetch('http://localhost:5000/send-email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: 'ankitdhakad4801@gmail.com', // Hardcoded recipient email
+        subject,
+        question,
+      }),
+    });
+    
+    const data = await response.json();
+    console.log('Email sent successfully', data);
+    
+
+    console.log('Email sent successfully', response.data);
+  } catch (error) {
+    console.error('Error sending email:', error.response || error.message);
+  }
+};
+
+
+  // const handleSendEmail = (email, subject, question) => {
+  //   // Here you would typically send the email using an API or service
+  //   console.log(
+  //     `Sending email to: ${email},Subject: ${subject} , Question: ${question}`
+  //   );
+  //   // Reset form state if needed
+  // };
   return (
     <nav className="nav-container">
       <div className="nav-logo">
@@ -62,7 +100,16 @@ export const Nav = function () {
         <h2>ZXSIS</h2>
       </div>
       <div className="nav">
-        <Link to="/" className="navword" aria-label="Home">
+      <Link to="/" className="navword" aria-label="Home">
+          Home
+        </Link>
+      {[ 'About', 'Services', 'Portfolio', 'Blog'].map((item) => (
+          <Link key={item} to={`/${item.toLowerCase()}`} className="navword" aria-label={item}>
+            {item}
+          </Link>
+        ))}
+
+        {/* <Link to="/" className="navword" aria-label="Home">
           Home
         </Link>
         <Link to="/about" className="navword" aria-label="About">
@@ -76,7 +123,7 @@ export const Nav = function () {
         </Link>
         <Link to="/blog" className="navword" aria-label="Blog">
           Blog
-        </Link>
+        </Link> */}
         <button
           className="quote-button"
           onClick={handleAskQuestion}
@@ -102,12 +149,8 @@ export const Nav = function () {
 export function Header  ({head ,subhead, button}) {
   return (
     <header className="app-header">
-      <div>
-        {head}
-      </div>
-      <p>
-        {subhead}
-      </p>
+      <h1>{head}</h1>
+      <p>{subhead}</p>
       <button>{button} </button>
     </header>
   );
@@ -127,11 +170,22 @@ export function AboutSection({ heading, subheading, content, imageUrl }) {
           <p>{content}</p>
         </div>
       </div>
-      {imageUrl && (
+      {/* {imageUrl && (
         <div
           className="about-image"
           style={{ backgroundImage: `url(${imageUrl})` }}
         ></div>
+      )} */}
+      {imageUrl ? (
+        <div
+          className="about-image"
+          style={{ backgroundImage: `url(${imageUrl})` }}
+        ></div>
+      ) : (
+        <div className="about-image-placeholder">
+          {/* Placeholder or fallback image if imageUrl is not provided */}
+          <p>No image available</p>
+        </div>
       )}
     </div>
   );

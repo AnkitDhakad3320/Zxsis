@@ -112,6 +112,8 @@ body.light {
   --bg-white: #FFF;
   --bgc-icon: #fff;
   --icon-strong: #0C111D;
+  --link-color: rgb(88, 88, 88);
+  --popup-container-background-color: rgba(0, 0, 0, .65);
   
 }
 
@@ -689,6 +691,9 @@ color: var(--static-white, #FFF);
   margin: 0 48px;
 }
 
+
+
+
 /* .slider {
   display: flex;
   align-items: center;
@@ -953,7 +958,7 @@ color: #475467;
   font-size: 32px;
   padding: 3.33px;
   cursor: pointer;
-  background-color: var(--primary-darker);
+  /* background-color: var(--primary-darker); */
   border-radius: 32px;
   display: flex;
   align-items: center;

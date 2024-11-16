@@ -1,6 +1,6 @@
 import { Footer, Nav ,Section } from "../Home/Home"
 // import "../../App.css";
-import "../Services/Services.css"
+// import "../Services/Services.css"
 // import {Lastabout} from "../About/About"
 // import "../About/About.css";
 // import "../Home/Home.css"
