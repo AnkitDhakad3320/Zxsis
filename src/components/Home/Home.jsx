@@ -1,7 +1,8 @@
-import React, { useState, useEffect , useRef } from "react";
-// import ScrollReveal from 'scrollreveal';
+import React, { useState, useEffect , useRef ,Suspense  } from "react";
+import ScrollReveal from 'scrollreveal';
 // import SwiperComponent from "../swiper";
 import { Link } from "react-router-dom";
+import { Helmet } from 'react-helmet';
 
 
 
@@ -28,6 +29,7 @@ import Animation from "../images/camera-hover-flash.json";
 import UiUx from "../images/video-conference-hover-pinch.json";
 import Saas from "../images/blinking.json";
 import Zx from "../images/zxsis (1).json";
+import Bg from "../images/Main Scene.json"
 
 import ThemeToggle from '../Toggle';
 
@@ -39,7 +41,10 @@ import image5 from '../images/image.jpg';
 
 
 
-export const Nav = function () {
+
+
+
+export const Nav = React.memo(() =>  {
   const [isModalOpen, setModalOpen] = useState(false);
 
   const handleAskQuestion = () => {
@@ -142,17 +147,27 @@ const handleSendEmail = async (subject, question) => {
       </div>
     </nav>
   );
-};
+});
 
 // =============================   HEADER  ===================================================
 
 export function Header  ({head ,subhead, button}) {
   return (
+    <div className="background-container">
+     <Lottie
+        animationData={Bg}  
+        loop={true}                     
+        autoplay={true}     
+        animationSpeed={0.3}               
+        style={{ width: '100vw', height: '100%', opacity:".05"  }}  
+      />
+
     <header className="app-header">
       <h1>{head}</h1>
       <p>{subhead}</p>
       <button>{button} </button>
     </header>
+    </div>
   );
 };
 
@@ -344,6 +359,7 @@ export const Portfolio = () => {
             <img
               src={item.image}
               alt={item.title}
+              loading="lazy" 
               className="portfolio-image"
               onError={(e) => { e.target.src = './assets/default.jpg'; }} // Optional fallback image
             />
@@ -352,6 +368,7 @@ export const Portfolio = () => {
           </div>
         ))}
       </div>
+      
     </div>
   );
 };
@@ -547,7 +564,7 @@ export  const Testimonial = () => {
         // Automatic slide transition
         const interval = setInterval(() => {
           swiperRef.current.slideNext();
-        }, 3000);
+        }, 5000);
 
         return () => clearInterval(interval);
       };
@@ -569,6 +586,11 @@ export  const Testimonial = () => {
       <div className="testimonial-header">
         What our <br />
         <span>Satisfied clients</span> say
+      </div>
+      <div style={{position:"relative"}}>
+      <div className="middle-rule">
+      <div className="rule rule-div"></div>
+      <div className="rule-div"></div>
       </div>
       <div className="swiper mySwiper">
         <div className="swiper-wrapper">
@@ -609,14 +631,16 @@ export  const Testimonial = () => {
             </div>
           ))}
         </div>
+        </div>
+      </div>
+
         {/* Pagination and Navigation */}
         <div className="swiperArrow">
         <div className="swiper-pagination"></div>
-        <div className="swiper-button-prev swipe-left"><ArrowLeft/> </div>
-        <div className="swiper-button-next swipe-right"><ArrowRight/> </div>
+        <div className="swiper-button-prev swipe-left"><ArrowLeft/></div>
+        <div className="swiper-button-next swipe-right"><ArrowRight/></div>
         </div>
         
-      </div>
     </div>
   );
 };
@@ -729,31 +753,203 @@ export const Faq = () => {
 
 //==============================MODAL=============================
 
-const Modal = ({ isOpen, onClose, onSend }) => {
-  const [FirstName, setFirstName] = useState("");
-  const [LastName, setLastName] = useState("");
-  const [Email, setEmail] = useState("");
-  const [Number, setNumber] = useState("");
-  const [Question, setQuestion] = useState("");
+// const Modal = ({ isOpen, onClose, onSend }) => {
+//   const [FirstName, setFirstName] = useState("");
+//   const [LastName, setLastName] = useState("");
+//   const [Email, setEmail] = useState("");
+//   const [Number, setNumber] = useState("");
+//   const [Question, setQuestion] = useState("");
 
-  const handleSend = () => {
-    onSend(Email, Number, Question);
-    resetForm();
-    onClose();
+//   const handleSend = () => {
+//     onSend(Email, Number, Question);
+//     resetForm();
+//     onClose();
+//   };
+
+//   const resetForm = () => {
+//     setFirstName("");
+//     setLastName("");
+//     setEmail("");
+//     setNumber("");
+//     setQuestion("");
+//   };
+
+//   if (!isOpen) return null;
+
+//   return (
+//     <div className="modal">
+//       <div className="modal-content">
+//         <div className="modal-content-header">
+//           <div>
+//             <h2>Get in Touch</h2>
+//             <p>You can reach us any time</p>
+//           </div>
+//           <button className="cross" onClick={onClose}>
+//             <CloseCircle/>
+//           </button>
+//         </div>
+//         <div className="full-name">
+//           <label>
+//             First Name
+//             <input
+//               className="name"
+//               type="Text"
+//               value={FirstName}
+//               placeholder="John"
+//               onChange={(e) => setFirstName(e.target.value)}
+//               required
+//             />
+//           </label>
+//           <label>
+//             Last Name
+//             <input
+//               className="name"
+//               type="Text"
+//               value={LastName}
+//               placeholder="Smith"
+//               onChange={(e) => setLastName(e.target.value)}
+//               required
+//             />
+//           </label>
+//         </div>
+//         <label>
+//           Email:
+//           <input
+//             type="email"
+//             value={Email}
+//             onChange={(e) => setEmail(e.target.value)}
+//             placeholder="✉ hello@deskkit.com"
+//             required
+//           />
+//         </label>
+//         <label>
+//           Phone No.
+//           <input
+//             type="Number"
+//             value={Number}
+//             placeholder="(+91) 9898778989"
+//             onChange={(e) => setNumber(e.target.value)}
+//             required
+//           />
+//         </label>
+//         <label>
+//           Your message
+//           <textarea
+//             value={Question}
+//             placeholder="How can we help You"
+//             onChange={(e) => setQuestion(e.target.value)}
+//             required
+//           />
+//         </label>
+//         <button className="sendButton" onClick={handleSend}>Send</button>
+//       </div>
+//     </div>
+//   );
+// };
+
+
+
+const Modal = ({ isOpen, onClose, onSend }) => {
+  // Consolidating the form data into a single object state
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    question: "",
+  });
+
+
+  const [errors, setErrors] = useState({
+    phone: '',
+    email: '',
+    question: '',
+  });
+
+  // Handle input change
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: '', // Clear the error when the user modifies the field
+    }));
   };
 
+  // Validate phone number
+  const validatePhone = (phone) => {
+    const phonePattern = /^[0-9]{10}$/; // Simple 10-digit phone number validation
+    return phonePattern.test(phone);
+  };
+
+  // Validate email
+  const validateEmail = (email) => {
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return emailPattern.test(email);
+  };
+
+  // Validate form before submission
+  const handleSend = (e) => {
+    e.preventDefault();
+    const { email, phone, question } = formData;
+    onSend(email, phone, question);
+   
+
+    const newErrors = { phone: '', email: '', question: '' };
+    let formIsValid = true;
+
+
+
+    // Validate phone number
+    if (!formData.phone || !validatePhone(formData.phone)) {
+      newErrors.phone = 'Please enter a valid 10-digit phone number.';
+      formIsValid = false;
+    }
+
+    // Validate email
+    if (!formData.email || !validateEmail(formData.email)) {
+      newErrors.email = 'Please enter a valid email address.';
+      formIsValid = false;
+    }
+
+    // Validate question field
+    if (!formData.question.trim()) {
+      newErrors.question = 'The question field cannot be empty.';
+      formIsValid = false;
+    }
+
+    // Set errors if any
+    setErrors(newErrors);
+
+    // If the form is valid, simulate form submission
+    if (formIsValid) {
+      resetForm();
+      onClose();
+      newErrors.submit = 'Form submitted successfully'
+      alert('Form submitted successfully!');
+      // You can also proceed with the API call or further actions here
+    }
+  };
+  
+
   const resetForm = () => {
-    setFirstName("");
-    setLastName("");
-    setEmail("");
-    setNumber("");
-    setQuestion("");
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      question: "",
+    });
   };
 
   if (!isOpen) return null;
 
   return (
     <div className="modal">
+    <form onSubmit={handleSend}>
       <div className="modal-content">
         <div className="modal-content-header">
           <div>
@@ -761,18 +957,20 @@ const Modal = ({ isOpen, onClose, onSend }) => {
             <p>You can reach us any time</p>
           </div>
           <button className="cross" onClick={onClose}>
-            <CloseCircle/>
+            <CloseCircle />
           </button>
         </div>
+
         <div className="full-name">
           <label>
             First Name
             <input
               className="name"
-              type="Text"
-              value={FirstName}
+              type="text"
+              name="firstName" // Use name attribute to bind it to the state
+              value={formData.firstName}
               placeholder="John"
-              onChange={(e) => setFirstName(e.target.value)}
+              onChange={handleChange}
               required
             />
           </label>
@@ -780,52 +978,71 @@ const Modal = ({ isOpen, onClose, onSend }) => {
             Last Name
             <input
               className="name"
-              type="Text"
-              value={LastName}
+              type="text"
+              name="lastName"
+              value={formData.lastName}
               placeholder="Smith"
-              onChange={(e) => setLastName(e.target.value)}
+              onChange={handleChange}
               required
             />
           </label>
         </div>
+
         <label>
           Email:
           <input
             type="email"
-            value={Email}
-            onChange={(e) => setEmail(e.target.value)}
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
             placeholder="✉ hello@deskkit.com"
             required
           />
         </label>
-        <label>
+        {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
+
+                <label>
           Phone No.
           <input
-            type="Number"
-            value={Number}
+            type="tel"
+            name="phone"
+            value={formData.phone}
             placeholder="(+91) 9898778989"
-            onChange={(e) => setNumber(e.target.value)}
+            onChange={handleChange}
             required
           />
         </label>
+           {errors.phone && <p style={{ color: 'red' }}>{errors.phone}</p>}
+
         <label>
           Your message
           <textarea
-            value={Question}
-            placeholder="How can we help You"
-            onChange={(e) => setQuestion(e.target.value)}
+            name="question"
+            value={formData.question}
+            placeholder="How can we help you?"
+            onChange={handleChange}
             required
+              rows="4"
+            cols="50"
           />
         </label>
-        <button className="sendButton" onClick={handleSend}>Send</button>
+        {errors.question && <p style={{ color: 'red' }}>{errors.question}</p>}
+
+        <button type="submit" className="sendButton" onClick={handleSend}>Send</button>
       </div>
+      {errors.submit && <p style={{ color: 'green' }}>{errors.submit}</p>}
+
+      </form>
     </div>
   );
 };
 
+export default Modal;
+
+
 //==========================================FOOTER====================================================
 
-export const Footer = () => {
+export const Footer = React.memo(() => {
   return (
     <div className="footer">
       <div className="footer-head-container">
@@ -916,47 +1133,109 @@ export const Footer = () => {
       </div>
     </div>
   );
-};
+});
 
 
 
 
 //-----------------------------------------MAIN HOME PAGE---------------------------------------------------
 
+const SEO = ({ title, description, keywords }) => (
+  <Helmet>
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+  </Helmet>
+);
+
+
 export const Home = () => {
 
-  // useEffect(() => {
-  //   const sr = ScrollReveal({
-  //     distance: '80px',
-  //     duration: 2000,
-  //     delay: 200,
-      
-  //   });
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "ZXSIS",
+    "url": "https://zxsis.com",
+    "logo": "https://zxsis.com/logo.png",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+1-800-555-5555",
+      "contactType": "Customer Service"
+    },
+    "sameAs": [
+      "https://www.instagram.com/zxsis",
+      "https://www.linkedin.com/company/zxsis"
+    ]
+  };
 
-  //   sr.reveal('.services-card-icon, .app-header, .services-card-icon ', { origin: 'top' });
-  //   // sr.reveal('.home-img img, .services-container, .portfolio-box, .testimonial-wrapper, .contact form', { origin: 'bottom' });
-  //   // sr.reveal('.home-content h1, .about-img img', { origin: 'left' });
-  //   // sr.reveal('.home-content h3, .home-content p, .about-content', { origin: 'right' });
-  // }, []);
+  useEffect(() => {
+    const sr = ScrollReveal({
+      distance: '80px',
+      duration: 2000,
+      delay: 200,
+      
+    });
+
+    sr.reveal('.services-card-icon, .app-header, .services-card-icon ', { origin: 'top' });
+    sr.reveal('.home-img img, .services-container, .portfolio-box, .testimonial-wrapper, .contact form', { origin: 'bottom' });
+    sr.reveal('.home-content h1, .about-img img', { origin: 'left' });
+    sr.reveal('.home-content h3, .home-content p, .about-content', { origin: 'right' });
+    return () => sr.destroy();  
+  }, []);
+
+  const seoData = {
+    title: "Transform Your Online Identity | ZXSIS",
+    description: "We provide innovative digital design solutions to elevate your business's online presence.",
+    keywords: "web design, branding, digital marketing, graphic design, Figma, portfolio",
+  };
 
 
   return (
     <div>
+
+<SEO {...seoData}/>
+<Helmet>
+        <title>Transform Your Online Identity | ZXSIS</title>
+        <meta name="description" content="Let us help you elevate your digital presence with stunning design and development services." />
+        <meta name="keywords" content="web design, branding, digital presence, graphic design, Figma, portfolio" />
+        <meta name="author" content="ZXSIS" />
+        <meta property="og:title" content="Transform Your Online Identity | ZXSIS" />
+        <meta property="og:description" content="We design beautiful and dynamic digital experiences." />
+        <meta property="og:image" content="https://zxsis.com/og-image.jpg" />
+        <meta property="og:url" content="https://zxsis.com" />
+        <meta name="twitter:card" content="summary_large_image" />
+
+
+
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
+      </Helmet>
+
+
+
       <div className="Home">
-        <nav className="navbar">
+        <header  className="navbar">
           <Nav />
-        </nav>
+        </header>
+
+        <main>
         <Header 
           head=<div>Transform Your Online <br></br> Identity with<span> Innovative</span> <br></br> and <span>Dynamic</span> Design</div>
           subhead="Let us bring your vision to life with stunning visuals that engage and inspire!"
           button="Explore Our Services"
         />
+        
+        <section>
+
         <AboutSection
           heading="About Us"
           subheading="At Zxsis"
           content="We're passionate about creating designs that not only look great but also drive results. Our team of experienced designers and developers work collaboratively to bring your vision to life, ensuring that every pixel serves a purpose."
           imageUrl="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&q=80&w=400"
         />
+        </section>
+        <section>
         <Section
           title={
             <span>
@@ -966,11 +1245,18 @@ export const Home = () => {
           subtitle="We've got you covered."
           cards={cardData}
         />
-        <OurServices />
-        <Portfolio />
-        <Testimonial />
-        <Faq />
-        <Footer />
+        </section>
+          <Suspense fallback={<div>Loading...</div>}>
+          <OurServices />
+          <Portfolio/>
+          <Testimonial />
+          <Faq />
+        </Suspense>
+          </main>
+          <footer>
+          <Footer />
+          </footer>
+
       </div>
     </div>
   );

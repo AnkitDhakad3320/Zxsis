@@ -1,7 +1,7 @@
 import { Footer, Nav } from "../Home/Home"
 import "../../App.css";
 import "./About.css";
-import TestimonialsSwiper from '../DarkMode';
+// import TestimonialsSwiper from '../DarkMode';
 
 
 export const Welcome = ({quote , header ,greet}) => {
@@ -87,7 +87,7 @@ export const About = ()=>{
             <AboutSec/>
             <OurTeam/>
             <Lastabout/>
-            <TestimonialsSwiper/>
+            {/* <TestimonialsSwiper/> */}
             <Footer/>
         </div>
     )
