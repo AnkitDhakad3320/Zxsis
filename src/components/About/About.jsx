@@ -1,5 +1,6 @@
 import { Footer, Nav } from "../Home/Home"
 import "../../App.css";
+import "../Home/Home.css";
 import "./About.css";
 // import TestimonialsSwiper from '../DarkMode';
 
@@ -78,7 +79,7 @@ export const Lastabout = ( ) => {
 export const About = ()=>{
     return (
         <div className="About">
-            <Nav/>
+            <Nav className="absolute"/>
             <Welcome
                 quote={"Welcome to Zxsis"}
                 header={<div>Where our <span>Passion for design</span>  meets our <br/> commitment to delivering <span>Impactful results.</span></div>}

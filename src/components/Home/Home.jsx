@@ -1,11 +1,8 @@
-import React, { useState, useEffect , useRef ,Suspense  } from "react";
-import ScrollReveal from 'scrollreveal';
+import React, { useState, useEffect, useRef, Suspense } from "react";
+import ScrollReveal from "scrollreveal";
 // import SwiperComponent from "../swiper";
 import { Link } from "react-router-dom";
-import { Helmet } from 'react-helmet';
-
-
-
+import { Helmet } from "react-helmet";
 
 // import "../../App.css";
 import "./Home.css";
@@ -29,22 +26,17 @@ import Animation from "../images/camera-hover-flash.json";
 import UiUx from "../images/video-conference-hover-pinch.json";
 import Saas from "../images/blinking.json";
 import Zx from "../images/zxsis (1).json";
-import Bg from "../images/Main Scene.json"
+import Bg from "../images/Main Scene.json";
 
-import ThemeToggle from '../Toggle';
+import ThemeToggle from "../Toggle";
 
-import image1 from '../images/image.png';
-import image2 from '../images/image (1).png';
-import image3 from '../images/image (2).png';
-import image4 from '../images/image (3).png';
-import image5 from '../images/image.jpg';
+import image1 from "../images/image.png";
+import image2 from "../images/image (1).png";
+import image3 from "../images/image (2).png";
+import image4 from "../images/image (3).png";
+import image5 from "../images/image.jpg";
 
-
-
-
-
-
-export const Nav = React.memo(() =>  {
+export const Nav = React.memo(() => {
   const [isModalOpen, setModalOpen] = useState(false);
 
   const handleAskQuestion = () => {
@@ -53,49 +45,34 @@ export const Nav = React.memo(() =>  {
 
   // import axios from 'axios';
 
-const handleSendEmail = async (subject, question) => {
-  if (!subject || !question) {
-    console.error('All fields must be filled out');
-    return;
-  }
+  const handleSendEmail = async (subject, question) => {
+    if (!subject || !question) {
+      console.error("All fields must be filled out");
+      return;
+    }
 
-  try {
-    // Send request to your backend server with fixed email
-    // const response = await fetch.post('http://localhost:5000/send-email', {
-    //   email: 'ankitdhakad4801@gmail.com', // Hardcoded recipient email
-    //   subject,
-    //   question,
-    // });
-    const response = await fetch('http://localhost:5000/send-email', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: 'ankitdhakad4801@gmail.com', // Hardcoded recipient email
-        subject,
-        question,
-      }),
-    });
-    
-    const data = await response.json();
-    console.log('Email sent successfully', data);
-    
+    try {
+      const response = await fetch("http://localhost:5000/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: "ankitdhakad4801@gmail.com", 
+          subject,
+          question,
+        }),
+      });
 
-    console.log('Email sent successfully', response.data);
-  } catch (error) {
-    console.error('Error sending email:', error.response || error.message);
-  }
-};
+      const data = await response.json();
+      console.log("Email sent successfully", data);
 
+      console.log("Email sent successfully", response.data);
+    } catch (error) {
+      console.error("Error sending email:", error.response || error.message);
+    }
+  };
 
-  // const handleSendEmail = (email, subject, question) => {
-  //   // Here you would typically send the email using an API or service
-  //   console.log(
-  //     `Sending email to: ${email},Subject: ${subject} , Question: ${question}`
-  //   );
-  //   // Reset form state if needed
-  // };
   return (
     <nav className="nav-container">
       <div className="nav-logo">
@@ -105,30 +82,19 @@ const handleSendEmail = async (subject, question) => {
         <h2>ZXSIS</h2>
       </div>
       <div className="nav">
-      <Link to="/" className="navword" aria-label="Home">
+        <Link to="/" className="navword" aria-label="Home">
           Home
         </Link>
-      {[ 'About', 'Services', 'Portfolio', 'Blog'].map((item) => (
-          <Link key={item} to={`/${item.toLowerCase()}`} className="navword" aria-label={item}>
+        {["About", "Services", "Portfolio", "Blog"].map((item) => (
+          <Link
+            key={item}
+            to={`/${item.toLowerCase()}`}
+            className="navword"
+            aria-label={item}
+          >
             {item}
           </Link>
         ))}
-
-        {/* <Link to="/" className="navword" aria-label="Home">
-          Home
-        </Link>
-        <Link to="/about" className="navword" aria-label="About">
-          About
-        </Link>
-        <Link to="/services" className="navword" aria-label="Services">
-          Services
-        </Link>
-        <Link to="/portfolio" className="navword" aria-label="Portfolio">
-          Portfolio
-        </Link>
-        <Link to="/blog" className="navword" aria-label="Blog">
-          Blog
-        </Link> */}
         <button
           className="quote-button"
           onClick={handleAskQuestion}
@@ -151,25 +117,24 @@ const handleSendEmail = async (subject, question) => {
 
 // =============================   HEADER  ===================================================
 
-export function Header  ({head ,subhead, button}) {
+export function Header({ head, subhead, button }) {
   return (
     <div className="background-container">
-     <Lottie
-        animationData={Bg}  
-        loop={true}                     
-        autoplay={true}     
-        animationSpeed={0.3}               
-        style={{ width: '100vw', height: '100%', opacity:".05"  }}  
+      <Lottie
+        animationData={Bg}
+        loop={true}
+        autoplay={true}
+        animationSpeed={0.3}
+        style={{ width: "100vw", height: "100%", opacity: ".05" }}
       />
-
-    <header className="app-header">
-      <h1>{head}</h1>
-      <p>{subhead}</p>
-      <button>{button} </button>
-    </header>
+      <header className="app-header">
+        <h1>{head}</h1>
+        <p>{subhead}</p>
+        <button>{button} </button>
+      </header>
     </div>
   );
-};
+}
 
 // ===================================== ABOUTSECTION ===============================================
 
@@ -185,12 +150,7 @@ export function AboutSection({ heading, subheading, content, imageUrl }) {
           <p>{content}</p>
         </div>
       </div>
-      {/* {imageUrl && (
-        <div
-          className="about-image"
-          style={{ backgroundImage: `url(${imageUrl})` }}
-        ></div>
-      )} */}
+      
       {imageUrl ? (
         <div
           className="about-image"
@@ -206,36 +166,33 @@ export function AboutSection({ heading, subheading, content, imageUrl }) {
   );
 }
 
-
 // ==================================DATA====================================================
-
 
 const cardData = [
   {
-    icon: <Palette/>,
+    icon: <Palette />,
     title: "Color System",
     description:
       "A massively versatile colour system based on the popular UI library palette.",
   },
   {
-    icon: <Text/>,
+    icon: <Text />,
     title: "Typography",
     description:
       "Elegant typography that enhances readability and user experience.",
   },
   {
-    icon: <Contrast/>,
+    icon: <Contrast />,
     title: "Spacing System",
     description:
       "A comprehensive spacing system to ensure consistency in layout.",
   },
   {
-    icon: <AlignItem/>,
+    icon: <AlignItem />,
     title: "Iconography",
     description: "A well-designed icon set to improve visual communication.",
   },
 ];
-
 
 // ==========================================SECTION===================================================
 
@@ -246,12 +203,10 @@ export const Section = ({ title, subtitle, cards }) => {
         <div className="section-heading">{title} </div>
         <div className="section-sub-heading">{subtitle}</div>
       </div>
-
       <div className="card-container">
         {cards.map((item, index) => (
           <div className="section-card" key={index}>
             <span className={`icon ${item.icon}`}>{item.icon} </span>{" "}
-            {/*  CSS classes for icons */}
             <div className="card-text">
               <h3>{item.title}</h3>
               <p>{item.description}</p>
@@ -359,16 +314,15 @@ export const Portfolio = () => {
             <img
               src={item.image}
               alt={item.title}
-              loading="lazy" 
+              loading="lazy"
               className="portfolio-image"
-              onError={(e) => { e.target.src = './assets/default.jpg'; }} // Optional fallback image
+              onError={(e) => {
+                e.target.src = "./assets/default.jpg";
+              }} // Optional fallback image
             />
-            {/* <h3>{item.title}</h3> */}
-          
           </div>
         ))}
       </div>
-      
     </div>
   );
 };
@@ -444,120 +398,31 @@ const testimonials = [
 
 //=============================TESTIMONIAL=================================================
 
-// export const Testimonial = () => {
-//   const [currentIndex, setCurrentIndex] = useState(0);
-
-//   const nextTestimonials = () => {
-//     setCurrentIndex((prevIndex) =>
-//       prevIndex + 2 < testimonials.length ? prevIndex + 2 : 0
-//     );
-//   };
-
-//   const prevTestimonials = () => {
-//     setCurrentIndex((prevIndex) =>
-//       prevIndex - 2 >= 0 ? prevIndex - 2 : testimonials.length - 2
-//     );
-//   };
-
-//   useEffect(() => {
-//     const interval = setInterval(nextTestimonials, 2000);
-//     return () => clearInterval(interval);
-//   }, [currentIndex]);
-
-//   return (
-//     <div className="testimonial-container">
-//       <div className="testimonial-header">
-//         What our <br />
-//         <span>Satisfied clients</span> say
-//       </div>
-//       <div className="testimonial-card-container">
-//         <div className="testimonial-cards">
-//           {testimonials
-//             .slice(currentIndex, currentIndex + 2)
-//             .map((testimonial) => (
-//               <div className="testimonial-card" key={testimonial.id}>
-//                 <span>
-//                   <svg
-//                     xmlns="http://www.w3.org/2000/svg"
-//                     width="48"
-//                     height="40"
-//                     viewBox="0 0 48 40"
-//                     fill="none"
-//                   >
-//                     <path
-//                       d="M9.68264 40C7.03714 40 4.762 38.9418 2.85724 36.8254C0.95248 34.709 9.91821e-05 31.9577 9.91821e-05 28.5714C9.91821e-05 24.9735 0.793747 21.2698 2.38105 17.4603C3.86253 13.7566 5.92603 10.3704 8.57153 7.30159C11.217 4.2328 14.2329 1.79894 17.6191 0L21.4287 7.14286C18.7832 9.15344 16.6139 11.164 14.9207 13.1746C13.1218 15.1852 11.9578 17.7249 11.4287 20.7936C13.4393 20.8995 15.2911 21.9048 16.9842 23.8095C18.5715 25.8201 19.3652 27.9894 19.3652 30.3175C19.3652 31.9048 18.9419 33.4392 18.0953 34.9206C17.143 36.4021 15.926 37.619 14.4445 38.5714C12.9631 39.5238 11.3758 40 9.68264 40ZM36.0318 40C33.3863 40 31.1112 38.9418 29.2064 36.8254C27.1959 34.709 26.1906 31.9577 26.1906 28.5714C26.1906 24.9735 26.9842 21.2698 28.5715 17.4603C30.1588 13.7566 32.2752 10.3704 34.9207 7.30159C37.5662 4.2328 40.5821 1.79894 43.9683 0L47.6191 7.14286C45.0795 9.15344 42.9631 11.164 41.2699 13.1746C39.471 15.1852 38.3599 17.7249 37.9366 20.7936C39.2064 20.8995 40.4234 21.3757 41.5874 22.2222C42.7514 23.1746 43.7567 24.3915 44.6033 25.873C45.344 27.3545 45.7144 28.836 45.7144 30.3175C45.7144 31.9048 45.2911 33.4392 44.4445 34.9206C43.4922 36.4021 42.2752 37.619 40.7937 38.5714C39.3123 39.5238 37.725 40 36.0318 40Z"
-//                       fill="#63C5EA"
-//                     />
-//                   </svg>
-//                 </span>
-//                 <div className="testimonial-card-text">
-//                   <div className="testimonial-text-head">
-//                     {testimonial.quote}
-//                   </div>
-//                   <div className="testimonial-text-para">
-//                     {testimonial.text}
-//                   </div>
-//                   <div className="testimonial-detail">
-//                     <div
-//                       className="testimonial-details-image"
-//                       style={{ backgroundImage: `url(${testimonial.image})` }}
-//                     ></div>
-//                     <div className="testimonial-details-name">
-//                       <h4>{testimonial.name}</h4>
-//                       <h5>{testimonial.location}</h5>
-//                     </div>
-//                   </div>
-//                 </div>
-
-//                 {/* <div className="vertical-rule"></div> */}
-
-//               </div>
-              
-//             ))}
-
-//         </div>
-//       </div>
-//       <div className="slider">
-//         <div className="swipe-left " onClick={prevTestimonials}>
-//           &lt;
-//         </div>
-//         <div className="dot swiper-pagination"></div> 
-//         <div className="swipe-right " onClick={nextTestimonials}>
-//           &gt;
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-
-
-
-
-
-export  const Testimonial = () => {
+export const Testimonial = () => {
   const swiperRef = useRef(null);
 
   useEffect(() => {
     const loadSwiper = () => {
-      const cssLink = document.createElement('link');
-      cssLink.rel = 'stylesheet';
-      cssLink.href = 'https://cdn.jsdelivr.net/npm/swiper@latest/swiper-bundle.min.css';
+      const cssLink = document.createElement("link");
+      cssLink.rel = "stylesheet";
+      cssLink.href =
+        "https://cdn.jsdelivr.net/npm/swiper@latest/swiper-bundle.min.css";
       document.head.appendChild(cssLink);
 
-      const script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/npm/swiper@latest/swiper-bundle.min.js';
+      const script = document.createElement("script");
+      script.src =
+        "https://cdn.jsdelivr.net/npm/swiper@latest/swiper-bundle.min.js";
       script.onload = () => {
-        swiperRef.current = new window.Swiper('.mySwiper', {
+        swiperRef.current = new window.Swiper(".mySwiper", {
           slidesPerView: 2,
           loop: true,
           pagination: {
-            el: '.swiper-pagination',
+            el: ".swiper-pagination",
             clickable: true,
           },
           navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
           },
         });
 
@@ -574,7 +439,9 @@ export  const Testimonial = () => {
     loadSwiper();
 
     return () => {
-      const swiperScript = document.querySelector('script[src="https://cdn.jsdelivr.net/npm/swiper@latest/swiper-bundle.min.js"]');
+      const swiperScript = document.querySelector(
+        'script[src="https://cdn.jsdelivr.net/npm/swiper@latest/swiper-bundle.min.js"]'
+      );
       if (swiperScript) {
         document.body.removeChild(swiperScript);
       }
@@ -587,69 +454,69 @@ export  const Testimonial = () => {
         What our <br />
         <span>Satisfied clients</span> say
       </div>
-      <div style={{position:"relative"}}>
-      <div className="middle-rule">
-      <div className="rule rule-div"></div>
-      <div className="rule-div"></div>
-      </div>
-      <div className="swiper mySwiper">
-        <div className="swiper-wrapper">
-          {testimonials.map((testimonial) => (
-            <div className="swiper-slide testimonial-card" key={testimonial.id}>
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="48"
-                  height="40"
-                  viewBox="0 0 48 40"
-                  fill="none"
-                >
-                  <path
-                    d="M9.68264 40C7.03714 40 4.762 38.9418 2.85724 36.8254C0.95248 34.709 9.91821e-05 31.9577 9.91821e-05 28.5714C9.91821e-05 24.9735 0.793747 21.2698 2.38105 17.4603C3.86253 13.7566 5.92603 10.3704 8.57153 7.30159C11.217 4.2328 14.2329 1.79894 17.6191 0L21.4287 7.14286C18.7832 9.15344 16.6139 11.164 14.9207 13.1746C13.1218 15.1852 11.9578 17.7249 11.4287 20.7936C13.4393 20.8995 15.2911 21.9048 16.9842 23.8095C18.5715 25.8201 19.3652 27.9894 19.3652 30.3175C19.3652 31.9048 18.9419 33.4392 18.0953 34.9206C17.143 36.4021 15.926 37.619 14.4445 38.5714C12.9631 39.5238 11.3758 40 9.68264 40ZM36.0318 40C33.3863 40 31.1112 38.9418 29.2064 36.8254C27.1959 34.709 26.1906 31.9577 26.1906 28.5714C26.1906 24.9735 26.9842 21.2698 28.5715 17.4603C30.1588 13.7566 32.2752 10.3704 34.9207 7.30159C37.5662 4.2328 40.5821 1.79894 43.9683 0L47.6191 7.14286C45.0795 9.15344 42.9631 11.164 41.2699 13.1746C39.471 15.1852 38.3599 17.7249 37.9366 20.7936C39.2064 20.8995 40.4234 21.3757 41.5874 22.2222C42.7514 23.1746 43.7567 24.3915 44.6033 25.873C45.344 27.3545 45.7144 28.836 45.7144 30.3175C45.7144 31.9048 45.2911 33.4392 44.4445 34.9206C43.4922 36.4021 42.2752 37.619 40.7937 38.5714C39.3123 39.5238 37.725 40 36.0318 40Z"
-                    fill="#63C5EA"
-                  />
-                </svg>
-              </span>
-              <div className="testimonial-card-text">
-                <div className="testimonial-text-head">
-                  {testimonial.quote}
-                </div>
-                <div className="testimonial-text-para">
-                  {testimonial.text}
-                </div>
-                <div className="testimonial-detail">
-                  <div
-                    className="testimonial-details-image"
-                    style={{ backgroundImage: `url(${testimonial.image})` }}
-                  ></div>
-                  <div className="testimonial-details-name">
-                    <h4>{testimonial.name}</h4>
-                    <h5>{testimonial.location}</h5>
+      <div style={{ position: "relative" }}>
+        <div className="middle-rule">
+          <div className="rule rule-div"></div>
+          <div className="rule-div"></div>
+        </div>
+        <div className="swiper mySwiper">
+          <div className="swiper-wrapper">
+            {testimonials.map((testimonial) => (
+              <div
+                className="swiper-slide testimonial-card"
+                key={testimonial.id}
+              >
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="48"
+                    height="40"
+                    viewBox="0 0 48 40"
+                    fill="none"
+                  >
+                    <path
+                      d="M9.68264 40C7.03714 40 4.762 38.9418 2.85724 36.8254C0.95248 34.709 9.91821e-05 31.9577 9.91821e-05 28.5714C9.91821e-05 24.9735 0.793747 21.2698 2.38105 17.4603C3.86253 13.7566 5.92603 10.3704 8.57153 7.30159C11.217 4.2328 14.2329 1.79894 17.6191 0L21.4287 7.14286C18.7832 9.15344 16.6139 11.164 14.9207 13.1746C13.1218 15.1852 11.9578 17.7249 11.4287 20.7936C13.4393 20.8995 15.2911 21.9048 16.9842 23.8095C18.5715 25.8201 19.3652 27.9894 19.3652 30.3175C19.3652 31.9048 18.9419 33.4392 18.0953 34.9206C17.143 36.4021 15.926 37.619 14.4445 38.5714C12.9631 39.5238 11.3758 40 9.68264 40ZM36.0318 40C33.3863 40 31.1112 38.9418 29.2064 36.8254C27.1959 34.709 26.1906 31.9577 26.1906 28.5714C26.1906 24.9735 26.9842 21.2698 28.5715 17.4603C30.1588 13.7566 32.2752 10.3704 34.9207 7.30159C37.5662 4.2328 40.5821 1.79894 43.9683 0L47.6191 7.14286C45.0795 9.15344 42.9631 11.164 41.2699 13.1746C39.471 15.1852 38.3599 17.7249 37.9366 20.7936C39.2064 20.8995 40.4234 21.3757 41.5874 22.2222C42.7514 23.1746 43.7567 24.3915 44.6033 25.873C45.344 27.3545 45.7144 28.836 45.7144 30.3175C45.7144 31.9048 45.2911 33.4392 44.4445 34.9206C43.4922 36.4021 42.2752 37.619 40.7937 38.5714C39.3123 39.5238 37.725 40 36.0318 40Z"
+                      fill="#63C5EA"
+                    />
+                  </svg>
+                </span>
+                <div className="testimonial-card-text">
+                  <div className="testimonial-text-head">
+                    {testimonial.quote}
+                  </div>
+                  <div className="testimonial-text-para">
+                    {testimonial.text}
+                  </div>
+                  <div className="testimonial-detail">
+                    <div
+                      className="testimonial-details-image"
+                      style={{ backgroundImage: `url(${testimonial.image})` }}
+                    ></div>
+                    <div className="testimonial-details-name">
+                      <h4>{testimonial.name}</h4>
+                      <h5>{testimonial.location}</h5>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
         </div>
       </div>
 
-        {/* Pagination and Navigation */}
-        <div className="swiperArrow">
+      {/* Pagination and Navigation */}
+      <div className="swiperArrow">
         <div className="swiper-pagination"></div>
-        <div className="swiper-button-prev swipe-left"><ArrowLeft/></div>
-        <div className="swiper-button-next swipe-right"><ArrowRight/></div>
+        <div className="swiper-button-prev swipe-left">
+          <ArrowLeft />
         </div>
-        
+        <div className="swiper-button-next swipe-right">
+          <ArrowRight />
+        </div>
+      </div>
     </div>
   );
 };
-
-
-
-
-
-
 
 // ======================================Data================================================
 
@@ -682,7 +549,9 @@ const FaqCard = ({ question, answer, isOpen, onToggle }) => (
   <div className="faq-card">
     <div className="faq-slide" onClick={onToggle}>
       <div className="faq-card-text">{question}</div>
-      <div className="faq-card-icon">{isOpen ? <CloseCircle/> : <AddCircle/>}</div>
+      <div className="faq-card-icon">
+        {isOpen ? <CloseCircle /> : <AddCircle />}
+      </div>
     </div>
     {isOpen && (
       <div className="faq-open">
@@ -700,8 +569,6 @@ const FaqCard = ({ question, answer, isOpen, onToggle }) => (
 export const Faq = () => {
   const [openIndex, setOpenIndex] = useState(null);
   const [isModalOpen, setModalOpen] = useState(false);
-
-
 
   const handleToggle = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -751,103 +618,7 @@ export const Faq = () => {
   );
 };
 
-//==============================MODAL=============================
-
-// const Modal = ({ isOpen, onClose, onSend }) => {
-//   const [FirstName, setFirstName] = useState("");
-//   const [LastName, setLastName] = useState("");
-//   const [Email, setEmail] = useState("");
-//   const [Number, setNumber] = useState("");
-//   const [Question, setQuestion] = useState("");
-
-//   const handleSend = () => {
-//     onSend(Email, Number, Question);
-//     resetForm();
-//     onClose();
-//   };
-
-//   const resetForm = () => {
-//     setFirstName("");
-//     setLastName("");
-//     setEmail("");
-//     setNumber("");
-//     setQuestion("");
-//   };
-
-//   if (!isOpen) return null;
-
-//   return (
-//     <div className="modal">
-//       <div className="modal-content">
-//         <div className="modal-content-header">
-//           <div>
-//             <h2>Get in Touch</h2>
-//             <p>You can reach us any time</p>
-//           </div>
-//           <button className="cross" onClick={onClose}>
-//             <CloseCircle/>
-//           </button>
-//         </div>
-//         <div className="full-name">
-//           <label>
-//             First Name
-//             <input
-//               className="name"
-//               type="Text"
-//               value={FirstName}
-//               placeholder="John"
-//               onChange={(e) => setFirstName(e.target.value)}
-//               required
-//             />
-//           </label>
-//           <label>
-//             Last Name
-//             <input
-//               className="name"
-//               type="Text"
-//               value={LastName}
-//               placeholder="Smith"
-//               onChange={(e) => setLastName(e.target.value)}
-//               required
-//             />
-//           </label>
-//         </div>
-//         <label>
-//           Email:
-//           <input
-//             type="email"
-//             value={Email}
-//             onChange={(e) => setEmail(e.target.value)}
-//             placeholder="✉ hello@deskkit.com"
-//             required
-//           />
-//         </label>
-//         <label>
-//           Phone No.
-//           <input
-//             type="Number"
-//             value={Number}
-//             placeholder="(+91) 9898778989"
-//             onChange={(e) => setNumber(e.target.value)}
-//             required
-//           />
-//         </label>
-//         <label>
-//           Your message
-//           <textarea
-//             value={Question}
-//             placeholder="How can we help You"
-//             onChange={(e) => setQuestion(e.target.value)}
-//             required
-//           />
-//         </label>
-//         <button className="sendButton" onClick={handleSend}>Send</button>
-//       </div>
-//     </div>
-//   );
-// };
-
-
+// ==============================MODAL=============================
 
 const Modal = ({ isOpen, onClose, onSend }) => {
   // Consolidating the form data into a single object state
@@ -859,11 +630,10 @@ const Modal = ({ isOpen, onClose, onSend }) => {
     question: "",
   });
 
-
   const [errors, setErrors] = useState({
-    phone: '',
-    email: '',
-    question: '',
+    phone: "",
+    email: "",
+    question: "",
   });
 
   // Handle input change
@@ -875,7 +645,7 @@ const Modal = ({ isOpen, onClose, onSend }) => {
     }));
     setErrors((prevErrors) => ({
       ...prevErrors,
-      [name]: '', // Clear the error when the user modifies the field
+      [name]: "", // Clear the error when the user modifies the field
     }));
   };
 
@@ -896,45 +666,38 @@ const Modal = ({ isOpen, onClose, onSend }) => {
     e.preventDefault();
     const { email, phone, question } = formData;
     onSend(email, phone, question);
-   
 
-    const newErrors = { phone: '', email: '', question: '' };
+    const newErrors = { phone: "", email: "", question: "" };
     let formIsValid = true;
-
-
 
     // Validate phone number
     if (!formData.phone || !validatePhone(formData.phone)) {
-      newErrors.phone = 'Please enter a valid 10-digit phone number.';
+      newErrors.phone = "Please enter a valid 10-digit phone number.";
       formIsValid = false;
     }
 
     // Validate email
     if (!formData.email || !validateEmail(formData.email)) {
-      newErrors.email = 'Please enter a valid email address.';
+      newErrors.email = "Please enter a valid email address.";
       formIsValid = false;
     }
 
     // Validate question field
     if (!formData.question.trim()) {
-      newErrors.question = 'The question field cannot be empty.';
+      newErrors.question = "The question field cannot be empty.";
       formIsValid = false;
     }
 
     // Set errors if any
     setErrors(newErrors);
-
-    // If the form is valid, simulate form submission
     if (formIsValid) {
       resetForm();
       onClose();
-      newErrors.submit = 'Form submitted successfully'
-      alert('Form submitted successfully!');
+      newErrors.submit = "Form submitted successfully";
+      alert("Form submitted successfully!");
       // You can also proceed with the API call or further actions here
     }
   };
-  
-
   const resetForm = () => {
     setFormData({
       firstName: "",
@@ -944,101 +707,96 @@ const Modal = ({ isOpen, onClose, onSend }) => {
       question: "",
     });
   };
-
   if (!isOpen) return null;
 
   return (
     <div className="modal">
-    <form onSubmit={handleSend}>
-      <div className="modal-content">
-        <div className="modal-content-header">
-          <div>
-            <h2>Get in Touch</h2>
-            <p>You can reach us any time</p>
+      <form onSubmit={handleSend}>
+        <div className="modal-content">
+          <div className="modal-content-header">
+            <div>
+              <h2>Get in Touch</h2>
+              <p>You can reach us any time</p>
+            </div>
+            <button className="cross" onClick={onClose}>
+              <CloseCircle />
+            </button>
           </div>
-          <button className="cross" onClick={onClose}>
-            <CloseCircle />
+
+          <div className="full-name">
+            <label>
+              First Name
+              <input
+                className="name"
+                type="text"
+                name="firstName"
+                value={formData.firstName}
+                placeholder="John"
+                onChange={handleChange}
+                required
+              />
+            </label>
+            <label>
+              Last Name
+              <input
+                className="name"
+                type="text"
+                name="lastName"
+                value={formData.lastName}
+                placeholder="Smith"
+                onChange={handleChange}
+                required
+              />
+            </label>
+          </div>
+          <label>
+            Email:
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="✉ hello@deskkit.com"
+              required
+            />
+          </label>
+          {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
+          <label>
+            Phone No.
+            <input
+              type="tel"
+              name="phone"
+              value={formData.phone}
+              placeholder="(+91) 9898778989"
+              onChange={handleChange}
+              required
+            />
+          </label>
+          {errors.phone && <p style={{ color: "red" }}>{errors.phone}</p>}
+          <label>
+            Your message
+            <textarea
+              name="question"
+              value={formData.question}
+              placeholder="How can we help you?"
+              onChange={handleChange}
+              required
+              rows="4"
+              cols="50"
+            />
+          </label>
+          {errors.question && <p style={{ color: "red" }}>{errors.question}</p>}
+          <button type="submit" className="sendButton" onClick={handleSend}>
+            Send
           </button>
         </div>
-
-        <div className="full-name">
-          <label>
-            First Name
-            <input
-              className="name"
-              type="text"
-              name="firstName" // Use name attribute to bind it to the state
-              value={formData.firstName}
-              placeholder="John"
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label>
-            Last Name
-            <input
-              className="name"
-              type="text"
-              name="lastName"
-              value={formData.lastName}
-              placeholder="Smith"
-              onChange={handleChange}
-              required
-            />
-          </label>
-        </div>
-
-        <label>
-          Email:
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="✉ hello@deskkit.com"
-            required
-          />
-        </label>
-        {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
-
-                <label>
-          Phone No.
-          <input
-            type="tel"
-            name="phone"
-            value={formData.phone}
-            placeholder="(+91) 9898778989"
-            onChange={handleChange}
-            required
-          />
-        </label>
-           {errors.phone && <p style={{ color: 'red' }}>{errors.phone}</p>}
-
-        <label>
-          Your message
-          <textarea
-            name="question"
-            value={formData.question}
-            placeholder="How can we help you?"
-            onChange={handleChange}
-            required
-              rows="4"
-            cols="50"
-          />
-        </label>
-        {errors.question && <p style={{ color: 'red' }}>{errors.question}</p>}
-
-        <button type="submit" className="sendButton" onClick={handleSend}>Send</button>
-      </div>
-      {errors.submit && <p style={{ color: 'green' }}>{errors.submit}</p>}
-
+        {errors.submit && <p style={{ color: "green" }}>{errors.submit}</p>}
       </form>
     </div>
   );
 };
 
 export default Modal;
-
 
 //==========================================FOOTER====================================================
 
@@ -1054,9 +812,7 @@ export const Footer = React.memo(() => {
         </div>
         <button className="footer-button">Chat with our experts</button>
       </div>
-
       <hr />
-
       <div className="footer-body">
         <div className="footer-body-left">
           <div className="footer-logo">
@@ -1064,7 +820,7 @@ export const Footer = React.memo(() => {
               <Flogo />
             </div>
             <div className="flogo-text">ZXSIS</div>
-            <ThemeToggle/>
+            <ThemeToggle />
           </div>
           <div className="footer-text">
             <p>
@@ -1098,7 +854,7 @@ export const Footer = React.memo(() => {
               rel="noopener noreferrer"
               className="link"
             >
-            <Instagram/>
+              <Instagram />
               Instagram
             </a>
             <a
@@ -1107,7 +863,7 @@ export const Footer = React.memo(() => {
               rel="noopener noreferrer"
               className="link"
             >
-            <Linkedin/>
+              <Linkedin />
               LinkedIn
             </a>
             <a
@@ -1116,7 +872,7 @@ export const Footer = React.memo(() => {
               rel="noopener noreferrer"
               className="link"
             >
-            <Twitter/>
+              <Twitter />
               Twitter
             </a>
             <a
@@ -1125,7 +881,7 @@ export const Footer = React.memo(() => {
               rel="noopener noreferrer"
               className="link"
             >
-            <Dribbble/>
+              <Dribbble />
               Dribble
             </a>
           </div>
@@ -1134,9 +890,6 @@ export const Footer = React.memo(() => {
     </div>
   );
 });
-
-
-
 
 //-----------------------------------------MAIN HOME PAGE---------------------------------------------------
 
@@ -1148,115 +901,128 @@ const SEO = ({ title, description, keywords }) => (
   </Helmet>
 );
 
-
 export const Home = () => {
-
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "ZXSIS",
-    "url": "https://zxsis.com",
-    "logo": "https://zxsis.com/logo.png",
-    "contactPoint": {
+    name: "ZXSIS",
+    url: "https://zxsis.com",
+    logo: "https://zxsis.com/logo.png",
+    contactPoint: {
       "@type": "ContactPoint",
-      "telephone": "+1-800-555-5555",
-      "contactType": "Customer Service"
+      telephone: "+1-800-555-5555",
+      contactType: "Customer Service",
     },
-    "sameAs": [
+    sameAs: [
       "https://www.instagram.com/zxsis",
-      "https://www.linkedin.com/company/zxsis"
-    ]
+      "https://www.linkedin.com/company/zxsis",
+    ],
   };
 
   useEffect(() => {
     const sr = ScrollReveal({
-      distance: '80px',
+      distance: "80px",
       duration: 2000,
-      delay: 200,
-      
+      delay: 100,
     });
 
-    sr.reveal('.services-card-icon, .app-header, .services-card-icon ', { origin: 'top' });
-    sr.reveal('.home-img img, .services-container, .portfolio-box, .testimonial-wrapper, .contact form', { origin: 'bottom' });
-    sr.reveal('.home-content h1, .about-img img', { origin: 'left' });
-    sr.reveal('.home-content h3, .home-content p, .about-content', { origin: 'right' });
-    return () => sr.destroy();  
+    sr.reveal(
+      ".services-header, .app-header, .services-card-icon, .footer-head-container, .testimonial-header ",
+      { origin: "top" }
+    );
+    sr.reveal(
+      ".home-img img, .services-container, .portfolio-box, .testimonial-wrapper, .contact form ,.swiperArrow",
+      { origin: "bottom" }
+    );
+    sr.reveal(".faq-head,.footer-body-left  , .about-content ", {
+      origin: "left",
+    });
+    sr.reveal(".faq-content, .footer-options ,.about-image ", {
+      origin: "right",
+    });
+    return () => sr.destroy();
   }, []);
 
   const seoData = {
     title: "Transform Your Online Identity | ZXSIS",
-    description: "We provide innovative digital design solutions to elevate your business's online presence.",
-    keywords: "web design, branding, digital marketing, graphic design, Figma, portfolio",
+    description:
+      "We provide innovative digital design solutions to elevate your business's online presence.",
+    keywords:
+      "web design, branding, digital marketing, graphic design, Figma, portfolio",
   };
-
 
   return (
     <div>
-
-<SEO {...seoData}/>
-<Helmet>
+      <SEO {...seoData} />
+      <Helmet>
         <title>Transform Your Online Identity | ZXSIS</title>
-        <meta name="description" content="Let us help you elevate your digital presence with stunning design and development services." />
-        <meta name="keywords" content="web design, branding, digital presence, graphic design, Figma, portfolio" />
+        <meta
+          name="description"
+          content="Let us help you elevate your digital presence with stunning design and development services."
+        />
+        <meta
+          name="keywords"
+          content="web design, branding, digital presence, graphic design, Figma, portfolio"
+        />
         <meta name="author" content="ZXSIS" />
-        <meta property="og:title" content="Transform Your Online Identity | ZXSIS" />
-        <meta property="og:description" content="We design beautiful and dynamic digital experiences." />
+        <meta
+          property="og:title"
+          content="Transform Your Online Identity | ZXSIS"
+        />
+        <meta
+          property="og:description"
+          content="We design beautiful and dynamic digital experiences."
+        />
         <meta property="og:image" content="https://zxsis.com/og-image.jpg" />
         <meta property="og:url" content="https://zxsis.com" />
         <meta name="twitter:card" content="summary_large_image" />
-
-
-
         <script type="application/ld+json">
           {JSON.stringify(structuredData)}
         </script>
       </Helmet>
 
-
-
       <div className="Home">
-        <header  className="navbar">
+        <header className="navbar">
           <Nav />
         </header>
-
         <main>
-        <Header 
-          head=<div>Transform Your Online <br></br> Identity with<span> Innovative</span> <br></br> and <span>Dynamic</span> Design</div>
-          subhead="Let us bring your vision to life with stunning visuals that engage and inspire!"
-          button="Explore Our Services"
-        />
-        
-        <section>
-
-        <AboutSection
-          heading="About Us"
-          subheading="At Zxsis"
-          content="We're passionate about creating designs that not only look great but also drive results. Our team of experienced designers and developers work collaboratively to bring your vision to life, ensuring that every pixel serves a purpose."
-          imageUrl="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&q=80&w=400"
-        />
-        </section>
-        <section>
-        <Section
-          title={
-            <span>
-              We design in <Symbol /> Figma
-            </span>
-          }
-          subtitle="We've got you covered."
-          cards={cardData}
-        />
-        </section>
+          <Header
+            head=<div>
+              Transform Your Online <br></br> Identity with
+              <span> Innovative</span> <br></br> and <span>Dynamic</span> Design
+            </div>
+            subhead="Let us bring your vision to life with stunning visuals that engage and inspire!"
+            button="Explore Our Services"
+          />
+          <section>
+            <AboutSection
+              heading="About Us"
+              subheading="At Zxsis"
+              content="We're passionate about creating designs that not only look great but also drive results. Our team of experienced designers and developers work collaboratively to bring your vision to life, ensuring that every pixel serves a purpose."
+              imageUrl="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&q=80&w=400"
+            />
+          </section>
+          <section>
+            <Section
+              title={
+                <span>
+                  We design in <Symbol /> Figma
+                </span>
+              }
+              subtitle="We've got you covered."
+              cards={cardData}
+            />
+          </section>
           <Suspense fallback={<div>Loading...</div>}>
-          <OurServices />
-          <Portfolio/>
-          <Testimonial />
-          <Faq />
-        </Suspense>
-          </main>
-          <footer>
+            <OurServices />
+            <Portfolio />
+            <Testimonial />
+            <Faq />
+          </Suspense>
+        </main>
+        <footer>
           <Footer />
-          </footer>
-
+        </footer>
       </div>
     </div>
   );
