@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, Suspense } from "react";
+import React, { useState, useEffect, useRef, Suspense ,useCallback } from "react";
 import ScrollReveal from "scrollreveal";
 // import SwiperComponent from "../swiper";
 import { Link } from "react-router-dom";
@@ -37,16 +37,16 @@ import image3 from "../images/image (2).png";
 import image4 from "../images/image (3).png";
 import image5 from "../images/image.jpg";
 
+// Memoized Nav component
 export const Nav = React.memo(() => {
   const [isModalOpen, setModalOpen] = useState(false);
 
-  const handleAskQuestion = () => {
+  const handleAskQuestion = useCallback(() => {
     setModalOpen(true);
-  };
+  }, []);
 
-  // import axios from 'axios';
-
-  const handleSendEmail = async (subject, question) => {
+  // Optimized handleSendEmail function
+  const handleSendEmail = useCallback(async (subject, question) => {
     if (!subject || !question) {
       console.error("All fields must be filled out");
       return;
@@ -67,15 +67,14 @@ export const Nav = React.memo(() => {
 
       const data = await response.json();
       console.log("Email sent successfully", data);
-
-      console.log("Email sent successfully", response.data);
     } catch (error) {
-      console.error("Error sending email:", error.response || error.message);
+      console.error("Error sending email:", error.message || error);
     }
-  };
+  }, []);
 
   return (
-    <nav className="nav-container">
+    <nav >
+    <div className="nav-container">
       <div className="nav-logo">
         <div className="logo-icon">
           <Lottie animationData={Zx} />
@@ -83,75 +82,65 @@ export const Nav = React.memo(() => {
         <h2>ZXSIS</h2>
       </div>
       <div className="nav">
-        <Link to="/" className="navword" aria-label="Home">
-          Home
-        </Link>
+        <Link to="/" className="navword" aria-label="Home">Home</Link>
         {["About", "Services", "Portfolio", "Blog"].map((item) => (
-          <Link
-            key={item}
-            to={`/${item.toLowerCase()}`}
-            className="navword"
-            aria-label={item}
-          >
+          <Link key={item} to={`/${item.toLowerCase()}`} className="navword" aria-label={item}>
             {item}
           </Link>
         ))}
-        <button
-          className="quote-button"
-          onClick={handleAskQuestion}
-          aria-label="Get a Quote"
-        >
+        <button className="quote-button" onClick={handleAskQuestion} aria-label="Get a Quote">
           Get a Quote
         </button>
       </div>
-      <div className="navModal">
-        <Modal
-          className="navModal"
-          isOpen={isModalOpen}
-          onClose={() => setModalOpen(false)}
+     
+    </div>
+    <div className="navModal">
+        <Modal 
+          className="navModal" 
+          isOpen={isModalOpen} 
+          onClose={() => setModalOpen(false)} 
           onSend={handleSendEmail}
         />
       </div>
     </nav>
   );
 });
-// ==============================================================================
-export const LottieComponent = () => {
-  const animationSpeed= 0.2;
 
+// LottieComponent for Background Animation
+export const LottieComponent = React.memo(() => {
+  const animationSpeed = 0.2;
 
   return (
     <div>
       <Lottie 
-        animationData={Bg}
-        loop={true}               
-        autoplay={true}   
+        animationData={Bg} 
+        loop={true} 
+        autoplay={true} 
         speed={animationSpeed} 
-        style={{ width: "100vw", height: "100%", opacity: ".05" }}
+        style={{ opacity: ".05" }} 
       />
     </div>
   );
-};
+});
 
-
-// =============================   HEADER  ===================================================
-
-export function Header({ head, subhead, button}) {
+// Header Component
+export function Header({ head, subhead, button }) {
   return (
-    <div className="background-container">
-     <LottieComponent/>
+   
       <header className="app-header">
+       <div className="background-container">
+      <LottieComponent />
+    </div>
         <h1>{head}</h1>
         <p>{subhead}</p>
-        <button>{button} </button>
+        <button>{button}</button>
       </header>
-    </div>
   );
 }
-
 // ===================================== ABOUTSECTION ===============================================
 
-export function AboutSection({ heading, subheading, content, imageUrl }) {
+export function AboutSection({ heading, subheading, content, imageUrl ,fallbackImage}) {
+  // const fallbackImage = "https://via.placeholder.com/400";
   return (
     <div className="about-container">
       <div className="about-content">
@@ -164,17 +153,16 @@ export function AboutSection({ heading, subheading, content, imageUrl }) {
         </div>
       </div>
       
-      {imageUrl ? (
-        <div
+      <div className="about-image-wrapper">
+        <img
           className="about-image"
-          style={{ backgroundImage: `url(${imageUrl})` }}
-        ></div>
-      ) : (
-        <div className="about-image-placeholder">
-          {/* Placeholder or fallback image if imageUrl is not provided */}
-          <p>No image available</p>
-        </div>
-      )}
+          src={imageUrl || fallbackImage}
+          alt="About Us"
+          loading="lazy" 
+          width="400"
+          height="auto"
+        />
+      </div>
     </div>
   );
 }
@@ -803,8 +791,8 @@ const Modal = ({ isOpen, onClose, onSend }) => {
             Send
           </button>
         </div>
-        {errors.submit && <p style={{ color: "green" }}>{errors.submit}</p>}
       </form>
+        {errors.submit && <p style={{ color: "green" }}>{errors.submit}</p>}
     </div>
   );
 };
@@ -905,7 +893,6 @@ export const Footer = React.memo(() => {
 });
 
 //-----------------------------------------MAIN HOME PAGE---------------------------------------------------
-
 const SEO = ({ title, description, keywords }) => (
   <Helmet>
     <title>{title}</title>
@@ -914,24 +901,24 @@ const SEO = ({ title, description, keywords }) => (
   </Helmet>
 );
 
-export const Home = () => {
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "ZXSIS",
-    url: "https://zxsis.com",
-    logo: "https://zxsis.com/logo.png",
-    contactPoint: {
-      "@type": "ContactPoint",
-      telephone: "+1-800-555-5555",
-      contactType: "Customer Service",
-    },
-    sameAs: [
-      "https://www.instagram.com/zxsis",
-      "https://www.linkedin.com/company/zxsis",
-    ],
-  };
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "ZXSIS",
+  url: "https://zxsis.com",
+  logo: "https://zxsis.com/logo.png",
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: "+1-800-555-5555",
+    contactType: "Customer Service",
+  },
+  sameAs: [
+    "https://www.instagram.com/zxsis",
+    "https://www.linkedin.com/company/zxsis",
+  ],
+};
 
+export const Home = () => {
   useEffect(() => {
     const sr = ScrollReveal({
       distance: "80px",
@@ -939,53 +926,27 @@ export const Home = () => {
       delay: 100,
     });
 
-    sr.reveal(
-      ".services-header, .app-header, .services-card-icon, .footer-head-container, .testimonial-header ",
-      { origin: "top" }
-    );
-    sr.reveal(
-      ".home-img img, .services-container, .portfolio-box, .testimonial-wrapper, .contact form ,.swiperArrow",
-      { origin: "bottom" }
-    );
-    sr.reveal(".faq-head,.footer-body-left  , .about-content ", {
-      origin: "left",
-    });
-    sr.reveal(".faq-content, .footer-options ,.about-image ", {
-      origin: "right",
-    });
+    sr.reveal(".services-header, .app-header, .services-card-icon, .footer-head-container, .testimonial-header", { origin: "top" });
+    sr.reveal(".home-img img, .services-container, .portfolio-box, .testimonial-wrapper, .contact form, .swiperArrow", { origin: "bottom" });
+    sr.reveal(".faq-head, .footer-body-left, .about-content", { origin: "left" });
+    sr.reveal(".faq-content, .footer-options, .about-image", { origin: "right" });
+
     return () => sr.destroy();
   }, []);
 
   const seoData = {
     title: "Transform Your Online Identity | ZXSIS",
-    description:
-      "We provide innovative digital design solutions to elevate your business's online presence.",
-    keywords:
-      "web design, branding, digital marketing, graphic design, Figma, portfolio",
+    description: "We provide innovative digital design solutions to elevate your business's online presence.",
+    keywords: "web design, branding, digital marketing, graphic design, Figma, portfolio",
   };
 
   return (
     <div>
       <SEO {...seoData} />
       <Helmet>
-        <title>Transform Your Online Identity | ZXSIS</title>
-        <meta
-          name="description"
-          content="Let us help you elevate your digital presence with stunning design and development services."
-        />
-        <meta
-          name="keywords"
-          content="web design, branding, digital presence, graphic design, Figma, portfolio"
-        />
         <meta name="author" content="ZXSIS" />
-        <meta
-          property="og:title"
-          content="Transform Your Online Identity | ZXSIS"
-        />
-        <meta
-          property="og:description"
-          content="We design beautiful and dynamic digital experiences."
-        />
+        <meta property="og:title" content={seoData.title} />
+        <meta property="og:description" content="We design beautiful and dynamic digital experiences." />
         <meta property="og:image" content="https://zxsis.com/og-image.jpg" />
         <meta property="og:url" content="https://zxsis.com" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -1000,28 +961,25 @@ export const Home = () => {
         </header>
         <main>
           <Header
-            head=<div>
-              Transform Your Online <br></br> Identity with
-              <span> Innovative</span> <br></br> and <span>Dynamic</span> Design
-            </div>
+            head={
+              <div>
+                Transform Your Online <br /> Identity with <span>Innovative</span> <br /> and <span>Dynamic</span> Design
+              </div>
+            }
             subhead="Let us bring your vision to life with stunning visuals that engage and inspire!"
             button="Explore Our Services"
           />
           <section>
             <AboutSection
               heading="About Us"
-              subheading="At Zxsis"
+              subheading="At ZXSIS"
               content="We're passionate about creating designs that not only look great but also drive results. Our team of experienced designers and developers work collaboratively to bring your vision to life, ensuring that every pixel serves a purpose."
               imageUrl="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&q=80&w=400"
             />
           </section>
           <section>
             <Section
-              title={
-                <span>
-                  We design in <Symbol /> Figma
-                </span>
-              }
+              title={<span>We design in <Symbol /> Figma</span>}
               subtitle="We've got you covered."
               cards={cardData}
             />
