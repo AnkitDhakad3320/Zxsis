@@ -22,6 +22,7 @@ import { ReactComponent as Twitter } from "../images/twitter-x-line (1).svg";
 import { ReactComponent as Dribbble } from "../images/dribbble-line.svg";
 
 import Lottie from "lottie-react";
+// import Lottie from 'react-lottie';
 import Animation from "../images/camera-hover-flash.json";
 import UiUx from "../images/video-conference-hover-pinch.json";
 import Saas from "../images/blinking.json";
@@ -114,19 +115,31 @@ export const Nav = React.memo(() => {
     </nav>
   );
 });
+// ==============================================================================
+export const LottieComponent = () => {
+  const animationSpeed= 0.2;
+
+
+  return (
+    <div>
+      <Lottie 
+        animationData={Bg}
+        loop={true}               
+        autoplay={true}   
+        speed={animationSpeed} 
+        style={{ width: "100vw", height: "100%", opacity: ".05" }}
+      />
+    </div>
+  );
+};
+
 
 // =============================   HEADER  ===================================================
 
-export function Header({ head, subhead, button }) {
+export function Header({ head, subhead, button}) {
   return (
     <div className="background-container">
-      <Lottie
-        animationData={Bg}
-        loop={true}
-        autoplay={true}
-        animationSpeed={0.3}
-        style={{ width: "100vw", height: "100%", opacity: ".05" }}
-      />
+     <LottieComponent/>
       <header className="app-header">
         <h1>{head}</h1>
         <p>{subhead}</p>
@@ -316,9 +329,9 @@ export const Portfolio = () => {
               alt={item.title}
               loading="lazy"
               className="portfolio-image"
-              onError={(e) => {
-                e.target.src = "./assets/default.jpg";
-              }} // Optional fallback image
+              // onError={(e) => {
+              //   e.target.src = "./assets/default.jpg";
+              // }} // Optional fallback image
             />
           </div>
         ))}

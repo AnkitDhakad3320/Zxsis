@@ -97,8 +97,6 @@ body {
 
 
 body.light {
-  /* background-color: #ffffff; */
-  /* color: #000000; */
   --storke-soft: #eaecf0;
   --static-white: #FFF;
   --primary-light: #cac0ff;
@@ -118,7 +116,6 @@ body.light {
 }
 
 body.dark {
-  /* background: var(--bg-white, #0C111D); */
 --storke-soft: #333741;
 --static-white: #FFF;
 --primary-light: rgba(120, 77, 239, 0.24);
@@ -132,7 +129,6 @@ body.dark {
 --text-soft: #85888E;
 --bgc-icon: #CAC0FF;
 --icon-strong:#fff;
-/* --bg-color: #0b061f; */
 }
 
 .theme-toggle {
@@ -147,20 +143,13 @@ body.dark {
 /* ============================================== */
 
 /* ScrollReveal.css */
-/* .scroll-reveal {
+.scroll-reveal {
   opacity: 0.3; 
   transition: opacity 0.5s ease-in-out; 
 }
 .scroll-reveal.is-visible {
   opacity: 1; 
-} */
-
-
-
-
-
-
-
+}
 
 /* ========================================= */
 .Home {
@@ -246,7 +235,6 @@ body.dark {
   height: 100vh; 
   width: 100%;  
   overflow: hidden;
-  /* opacity: .1; */
   z-index: -1;
 }
 
@@ -320,7 +308,6 @@ body.dark {
   line-height: 64px;
   letter-spacing: -1%;
   color: var(--text-strong, #FFF);
-  /* background: var(--bg-white, #0C111D); */
   padding-bottom: 24px;
   margin-bottom: 24px;
 }
