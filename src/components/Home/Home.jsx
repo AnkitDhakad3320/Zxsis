@@ -289,9 +289,9 @@ const portfolioData = [
   { id: 3, image: image3, title: "Project 3" },
   { id: 4, image: image4, title: "Project 4" },
   { id: 5, image: image5, title: "Project 5" },
-  { id: 6, image: "path/to/image6.jpg", title: "Project 6" },
-  { id: 7, image: "path/to/image7.jpg", title: "Project 7" },
-  { id: 8, image: "path/to/image8.jpg", title: "Project 8" },
+  { id: 6, image: image2, title: "Project 6" },
+  { id: 7, image: image4, title: "Project 7" },
+  { id: 8, image: image1, title: "Project 8" },
 ];
 
 // =========================PORTFOLIO======================================================
