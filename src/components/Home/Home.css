@@ -540,11 +540,12 @@ body.dark {
 }
 
 /* ------------------------------------------------------------------------------------- */
-/* 
+
 .portfolio {
-  margin: 0px 108px;
+  width: 100%;
+  /* margin: 0px 108px; */
   overflow-x: hidden;
-} */
+}
 
 .portfolio-container {
   /* width: 100%; */
