@@ -281,6 +281,8 @@ export const OurServices = () => {
   );
 };
 
+
+
 // ============================DATA===========================================================
 
 const portfolioData = [
@@ -297,6 +299,7 @@ const portfolioData = [
 // =========================PORTFOLIO======================================================
 
 export const Portfolio = () => {
+  const [isHover, setIsHover] = useState(false);
   return (
     <div className="portfolio">
       <div className="portfolio-container">
@@ -309,7 +312,9 @@ export const Portfolio = () => {
         </div>
       </div>
 
-      <div className="portfolio-card-container">
+      <div className={`portfolio-card-container ${isHover ? 'paused' : ''}`}
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)} >
         {portfolioData.map((item) => (
           <div className="portfolio-card" key={item.id}>
             <img
