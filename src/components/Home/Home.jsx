@@ -970,17 +970,17 @@ export const Home = () => {
     });
 
     sr.reveal(
-      ".services-header, .app-header, .services-card-icon, .footer-head-container, .testimonial-header",
+      ".services-header, .app-header, .services-card-icon, .footer-head-container, .portfolio-container ,.section-container , .testimonial-header",
       { origin: "top" }
     );
     sr.reveal(
-      ".home-img img, .services-container, .portfolio-box, .testimonial-wrapper, .contact form, .swiperArrow",
+      ".home-img img,.swiper, .services-container, .portfolio-box, .testimonial-wrapper, .contact form, .swiperArrow",
       { origin: "bottom" }
     );
-    sr.reveal(".faq-head,.copyright-tag , .footer-body-left, .about-content", {
+    sr.reveal(".faq-head,.copyright-tag , .footer-body-left, .about-content ", {
       origin: "left",
     });
-    sr.reveal(".faq-content, .footer-options, .about-image", {
+    sr.reveal(".faq-content ,.footer-logo , .footer-options, .about-image , .footer-socialmedia", {
       origin: "right",
     });
 
