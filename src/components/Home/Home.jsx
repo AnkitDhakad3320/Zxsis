@@ -853,22 +853,23 @@ export const Footer = React.memo(() => {
         <button className="footer-button">Chat with our experts</button>
       </div>
       <hr />
-      <div className="footer-body">
-        <div className="footer-body-left">
-          <div className="footer-logo">
+      <div className="footer-logo">
             <div className="flogo-icon">
               <Flogo />
             </div>
             <div className="flogo-text">ZXSIS</div>
             <ThemeToggle />
           </div>
+      <div className="footer-body">
+      
+        <div className="footer-body-left">
           <div className="footer-text">
             <p>
               Transform Your Online Identity with <br /> Innovative and Dynamic
               Design
             </p>
             <p>
-              Let us bring your vision to life with stunning visuals <br /> that
+              Let us bring your vision to life with stunning  <br/> visuals that
               engage and inspire!
             </p>
           </div>
@@ -887,7 +888,9 @@ export const Footer = React.memo(() => {
             <Link to="/faq">FAQ</Link>
           </div>
         </div>
-        <div className="foot-last">
+        
+      </div>
+      <div className="foot-last">
           <div className="copyright-tag">All rights reserved by ZXSIS LLP</div>
           <div className="footer-socialmedia">
             <a
@@ -897,7 +900,7 @@ export const Footer = React.memo(() => {
               className="link"
             >
               <Instagram />
-              Instagram
+              <span>Instagram</span>
             </a>
             <a
               href="https://www.linkedin.com/company/zxsis/"
@@ -906,7 +909,7 @@ export const Footer = React.memo(() => {
               className="link"
             >
               <Linkedin />
-              LinkedIn
+              <span>LinkedIn</span>
             </a>
             <a
               href="https://www.twitter.com/"
@@ -915,7 +918,7 @@ export const Footer = React.memo(() => {
               className="link"
             >
               <Twitter />
-              Twitter
+              <span>Twitter</span>
             </a>
             <a
               href="https://www.dribble.com/"
@@ -924,11 +927,10 @@ export const Footer = React.memo(() => {
               className="link"
             >
               <Dribbble />
-              Dribble
+              <span>Dribble</span>
             </a>
           </div>
         </div>
-      </div>
     </div>
   );
 });
