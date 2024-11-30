@@ -540,9 +540,9 @@ export const Testimonial = () => {
           </div>
         </div>
       </div>
-
       {/* Pagination and Navigation */}
-      <div className="swiperArrow">
+<div className="dot-container">
+<div className="swiperArrow">
         <div className="swiper-pagination"></div>
         <div className="swiper-button-prev swipe-left">
           <ArrowLeft />
@@ -551,6 +551,8 @@ export const Testimonial = () => {
           <ArrowRight />
         </div>
       </div>
+</div>
+     
     </div>
   );
 };
@@ -934,6 +936,7 @@ export const Footer = React.memo(() => {
     </div>
   );
 });
+
 
 //-----------------------------------------MAIN HOME PAGE---------------------------------------------------
 const SEO = ({ title, description, keywords }) => (
