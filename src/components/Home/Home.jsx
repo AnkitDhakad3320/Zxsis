@@ -9,6 +9,8 @@ import ScrollReveal from "scrollreveal";
 // import SwiperComponent from "../swiper";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import emailjs from 'emailjs-com';  
+
 
 // import "../../App.css";
 import "./Home.css";
@@ -662,8 +664,8 @@ export const Faq = () => {
 
 // ==============================MODAL=============================
 
-const Modal = ({ isOpen, onClose, onSend }) => {
-  // Consolidating the form data into a single object state
+const Modal = ({ isOpen, onClose }) => {
+ 
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -703,11 +705,9 @@ const Modal = ({ isOpen, onClose, onSend }) => {
     return emailPattern.test(email);
   };
 
-  // Validate form before submission
+  // Validate form before submission and send email
   const handleSend = (e) => {
     e.preventDefault();
-    const { email, phone, question } = formData;
-    onSend(email, phone, question);
 
     const newErrors = { phone: "", email: "", question: "" };
     let formIsValid = true;
@@ -733,13 +733,24 @@ const Modal = ({ isOpen, onClose, onSend }) => {
     // Set errors if any
     setErrors(newErrors);
     if (formIsValid) {
-      resetForm();
-      onClose();
-      newErrors.submit = "Form submitted successfully";
-      alert("Form submitted successfully!");
-      // You can also proceed with the API call or further actions here
+      // Send email using EmailJS
+      emailjs
+        .send('service_y1svujj3320', 'template_8mkgrbg', formData, 'ARl-BTdvE0TwVlZfk')
+        .then(
+          (result) => {
+            alert("Form submitted successfully!");
+            console.log(result.text);
+            resetForm();
+            onClose();
+          },
+          (error) => {
+            alert("Failed to send message.");
+            console.log(error.text);
+          }
+        );
     }
   };
+
   const resetForm = () => {
     setFormData({
       firstName: "",
@@ -749,6 +760,7 @@ const Modal = ({ isOpen, onClose, onSend }) => {
       question: "",
     });
   };
+
   if (!isOpen) return null;
 
   return (
@@ -761,7 +773,7 @@ const Modal = ({ isOpen, onClose, onSend }) => {
               <p>You can reach us any time</p>
             </div>
             <button className="cross" onClick={onClose}>
-              <CloseCircle />
+              {/* Cross button to close modal */}
             </button>
           </div>
 
@@ -828,7 +840,7 @@ const Modal = ({ isOpen, onClose, onSend }) => {
             />
           </label>
           {errors.question && <p style={{ color: "red" }}>{errors.question}</p>}
-          <button type="submit" className="sendButton" onClick={handleSend}>
+          <button type="submit" className="sendButton">
             Send
           </button>
         </div>
@@ -839,6 +851,7 @@ const Modal = ({ isOpen, onClose, onSend }) => {
 };
 
 export default Modal;
+
 
 //==========================================FOOTER====================================================
 

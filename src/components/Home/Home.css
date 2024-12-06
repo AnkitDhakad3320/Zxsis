@@ -1046,14 +1046,14 @@ body.dark {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin-top: 72px;
+  margin-top: 18px;
 }
 
 .footer-logo {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-top: 72px;
+  margin-top: 36px;
 }
 
 .flogo-icon {
@@ -1091,8 +1091,6 @@ body.dark {
   font-family: "Archivo", sans-serif;
   font-size: 1.125rem;
   font-weight: 400;
-  line-height: 24px;
-  padding: 24px 0px;
   color: #fff;
 }
 
