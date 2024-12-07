@@ -9,8 +9,7 @@ import ScrollReveal from "scrollreveal";
 // import SwiperComponent from "../swiper";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import emailjs from 'emailjs-com';  
-
+import emailjs from "emailjs-com";
 
 // import "../../App.css";
 import "./Home.css";
@@ -20,9 +19,10 @@ import { ReactComponent as Palette } from "../images/palette-line.svg";
 import { ReactComponent as Text } from "../images/text.svg";
 import { ReactComponent as Contrast } from "../images/contrast-2-line.svg";
 import { ReactComponent as AlignItem } from "../images/align-item-left-line.svg";
-import { ReactComponent as ArrowLeft } from "../images/align-item-left-line.svg";
-import { ReactComponent as ArrowRight } from "../images/arrow-right-s-line.svg";
+// import { ReactComponent as ArrowLeft } from "../images/arrow-left-s-line.svg";
+// import { ReactComponent as ArrowRight } from "../images/arrow-right-s-line.svg";
 import { ReactComponent as AddCircle } from "../images/add-circle-fill.svg";
+import { ReactComponent as Addlink } from "../images/arrow-right-up-line.svg";
 import { ReactComponent as CloseCircle } from "../images/close-circle-fill.svg";
 import { ReactComponent as Instagram } from "../images/instagram-line.svg";
 import { ReactComponent as Linkedin } from "../images/linkedin-line.svg";
@@ -307,14 +307,77 @@ export const OurServices = () => {
 // ============================DATA===========================================================
 
 const portfolioData = [
-  { id: 1, image: image1, title: "Project 1" },
-  { id: 2, image: image2, title: "Project 2" },
-  { id: 3, image: image3, title: "Project 3" },
-  { id: 4, image: image4, title: "Project 4" },
-  { id: 5, image: image5, title: "Project 5" },
-  { id: 6, image: image2, title: "Project 6" },
-  { id: 7, image: image4, title: "Project 7" },
-  { id: 8, image: image1, title: "Project 8" },
+  {
+    id: 1.1,
+    image: image1,
+    title: "Project 1",
+    detail: "Description for project 1",
+    link: "/destination-page#specific-section",
+  },
+  {
+    id: 1,
+    image: image1,
+    title: "Project 1",
+    link: "#",
+    detail:
+      "A highly adaptable color system inspired by the widely-used Ui library palette.",
+  },
+  {
+    id: 2,
+    image: image2,
+    title: "Project 2",
+    link: "#",
+    detail:
+      "A highly adaptable color system inspired by the widely-used Ui library palette.",
+  },
+  {
+    id: 3,
+    image: image3,
+    title: "Project 3",
+    link: "#",
+    detail:
+      "A highly adaptable color system inspired by the widely-used Ui library palette.",
+  },
+  {
+    id: 4,
+    image: image4,
+    title: "Project 4",
+    link: "#",
+    detail:
+      "A highly adaptable color system inspired by the widely-used Ui library palette.",
+  },
+  {
+    id: 5,
+    image: image5,
+    title: "Project 5",
+    link: "#",
+    detail:
+      "A highly adaptable color system inspired by the widely-used Ui library palette.",
+  },
+  {
+    id: 6,
+    image: image2,
+    title: "Project 6",
+    link: "#",
+    detail:
+      "A highly adaptable color system inspired by the widely-used Ui library palette.",
+  },
+  {
+    id: 7,
+    image: image4,
+    title: "Project 7",
+    link: "#",
+    detail:
+      "A highly adaptable color system inspired by the widely-used Ui library palette.",
+  },
+  {
+    id: 8,
+    image: image1,
+    title: "Project 8",
+    link: "#",
+    detail:
+      "A highly adaptable color system inspired by the widely-used Ui library palette.",
+  },
 ];
 
 // =========================PORTFOLIO======================================================
@@ -349,6 +412,19 @@ export const Portfolio = () => {
               //   e.target.src = "./assets/default.jpg";
               // }} // Optional fallback image
             />
+            <div className="card-details">
+              <h2 className="card-heading">{item.title}</h2>
+              <p className="card-about">{item.detail}</p>
+            </div>
+            <div className="card-link">
+              <a
+                href={item.link}
+                className="cardlinkto"
+                target="_self" 
+              >
+                <Addlink/>
+              </a>
+            </div>
           </div>
         ))}
       </div>
@@ -543,18 +619,17 @@ export const Testimonial = () => {
         </div>
       </div>
       {/* Pagination and Navigation */}
-<div className="dot-container">
-<div className="swiperArrow">
-        <div className="swiper-pagination"></div>
-        <div className="swiper-button-prev swipe-left">
-          <ArrowLeft />
-        </div>
-        <div className="swiper-button-next swipe-right">
-          <ArrowRight />
+      <div className="dot-container">
+        <div className="swiperArrow">
+          <div className="swiper-pagination"></div>
+          <div className="swiper-button-prev swipe-left">
+            {/* <ArrowLeft /> */}
+          </div>
+          <div className="swiper-button-next swipe-right">
+            {/* <ArrowRight /> */}
+          </div>
         </div>
       </div>
-</div>
-     
     </div>
   );
 };
@@ -662,10 +737,9 @@ export const Faq = () => {
   );
 };
 
-// ==============================MODAL=============================
+//==============================MODAL=============================
 
 const Modal = ({ isOpen, onClose }) => {
- 
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -674,11 +748,7 @@ const Modal = ({ isOpen, onClose }) => {
     question: "",
   });
 
-  const [errors, setErrors] = useState({
-    phone: "",
-    email: "",
-    question: "",
-  });
+  const [errors, setErrors] = useState({});
 
   // Handle input change
   const handleChange = (e) => {
@@ -689,68 +759,55 @@ const Modal = ({ isOpen, onClose }) => {
     }));
     setErrors((prevErrors) => ({
       ...prevErrors,
-      [name]: "", // Clear the error when the user modifies the field
+      [name]: "", // Clear error when the field is updated
     }));
   };
 
-  // Validate phone number
-  const validatePhone = (phone) => {
-    const phonePattern = /^[0-9]{10}$/; // Simple 10-digit phone number validation
-    return phonePattern.test(phone);
+  // Validation logic
+  const validateForm = () => {
+    const newErrors = {};
+    const { email, phone, question } = formData;
+
+    if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) {
+      newErrors.email = "Please enter a valid email address.";
+    }
+    if (!/^[0-9]{10}$/.test(phone)) {
+      newErrors.phone = "Please enter a valid 10-digit phone number.";
+    }
+    if (!question.trim()) {
+      newErrors.question = "The question field cannot be empty.";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
-  // Validate email
-  const validateEmail = (email) => {
-    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    return emailPattern.test(email);
-  };
-
-  // Validate form before submission and send email
+  // Form submission handler
   const handleSend = (e) => {
     e.preventDefault();
 
-    const newErrors = { phone: "", email: "", question: "" };
-    let formIsValid = true;
-
-    // Validate phone number
-    if (!formData.phone || !validatePhone(formData.phone)) {
-      newErrors.phone = "Please enter a valid 10-digit phone number.";
-      formIsValid = false;
-    }
-
-    // Validate email
-    if (!formData.email || !validateEmail(formData.email)) {
-      newErrors.email = "Please enter a valid email address.";
-      formIsValid = false;
-    }
-
-    // Validate question field
-    if (!formData.question.trim()) {
-      newErrors.question = "The question field cannot be empty.";
-      formIsValid = false;
-    }
-
-    // Set errors if any
-    setErrors(newErrors);
-    if (formIsValid) {
-      // Send email using EmailJS
+    if (validateForm()) {
       emailjs
-        .send('service_y1svujj3320', 'template_8mkgrbg', formData, 'ARl-BTdvE0TwVlZfk')
+        .send(
+          "service_y1svujj3320",
+          "template_8mkgrbg",
+          formData,
+          "ARl-BTdvE0TwVlZfk"
+        )
         .then(
           (result) => {
-            alert("Form submitted successfully!");
-            console.log(result.text);
+            console.log("Email sent:", result.text);
             resetForm();
             onClose();
           },
           (error) => {
-            alert("Failed to send message.");
-            console.log(error.text);
+            console.error("Email sending failed:", error.text);
           }
         );
     }
   };
 
+  // Reset form fields
   const resetForm = () => {
     setFormData({
       firstName: "",
@@ -767,15 +824,15 @@ const Modal = ({ isOpen, onClose }) => {
     <div className="modal">
       <form onSubmit={handleSend}>
         <div className="modal-content">
-          <div className="modal-content-header">
+          <header className="modal-content-header">
             <div>
               <h2>Get in Touch</h2>
               <p>You can reach us any time</p>
             </div>
-            <button className="cross" onClick={onClose}>
-              {/* Cross button to close modal */}
+            <button type="button" className="cross" onClick={onClose}>
+              <CloseCircle></CloseCircle>
             </button>
-          </div>
+          </header>
 
           <div className="full-name">
             <label>
@@ -803,32 +860,36 @@ const Modal = ({ isOpen, onClose }) => {
               />
             </label>
           </div>
+
           <label>
-            Email:
+            Email
             <input
               type="email"
               name="email"
               value={formData.email}
+              placeholder="hello@deskkit.com"
               onChange={handleChange}
-              placeholder="✉ hello@deskkit.com"
               required
             />
           </label>
           {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
+
           <label>
-            Phone No.
+            Phone Number
             <input
               type="tel"
               name="phone"
+              maxLength={10}
               value={formData.phone}
-              placeholder="(+91) 9898778989"
+              placeholder="1234567890"
               onChange={handleChange}
               required
             />
           </label>
           {errors.phone && <p style={{ color: "red" }}>{errors.phone}</p>}
+
           <label>
-            Your message
+            Your Message
             <textarea
               name="question"
               value={formData.question}
@@ -836,22 +897,20 @@ const Modal = ({ isOpen, onClose }) => {
               onChange={handleChange}
               required
               rows="4"
-              cols="50"
             />
           </label>
           {errors.question && <p style={{ color: "red" }}>{errors.question}</p>}
+
           <button type="submit" className="sendButton">
             Send
           </button>
         </div>
       </form>
-      {errors.submit && <p style={{ color: "green" }}>{errors.submit}</p>}
     </div>
   );
 };
 
 export default Modal;
-
 
 //==========================================FOOTER====================================================
 
@@ -869,14 +928,13 @@ export const Footer = React.memo(() => {
       </div>
       <hr />
       <div className="footer-logo">
-            <div className="flogo-icon">
-              <Flogo />
-            </div>
-            <div className="flogo-text">ZXSIS</div>
-            <ThemeToggle />
-          </div>
+        <div className="flogo-icon">
+          <Flogo />
+        </div>
+        <div className="flogo-text">ZXSIS</div>
+        <ThemeToggle />
+      </div>
       <div className="footer-body">
-      
         <div className="footer-body-left">
           <div className="footer-text">
             <p>
@@ -884,7 +942,7 @@ export const Footer = React.memo(() => {
               Design
             </p>
             <p>
-              Let us bring your vision to life with stunning  <br/> visuals that
+              Let us bring your vision to life with stunning <br /> visuals that
               engage and inspire!
             </p>
           </div>
@@ -903,55 +961,53 @@ export const Footer = React.memo(() => {
             <Link to="/faq">FAQ</Link>
           </div>
         </div>
-        
       </div>
       <div className="foot-last">
-          <div className="copyright-tag">All rights reserved by ZXSIS LLP</div>
-          <div className="footer-socialmedia">
-            <a
-              href="https://www.instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="link"
-            >
-              <Instagram />
-              <span>Instagram</span>
-            </a>
-            <a
-              href="https://www.linkedin.com/company/zxsis/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="link"
-            >
-              <Linkedin />
-              <span>LinkedIn</span>
-            </a>
-            <a
-              href="https://www.twitter.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="link"
-            >
-              <Twitter />
-              <span>Twitter</span>
-            </a>
-            <a
-              href="https://www.dribble.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="link"
-            >
-              <Dribbble />
-              <span>Dribble</span>
-            </a>
-          </div>
+        <div className="copyright-tag">All rights reserved by ZXSIS LLP</div>
+        <div className="footer-socialmedia">
+          <a
+            href="https://www.instagram.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link"
+          >
+            <Instagram />
+            <span>Instagram</span>
+          </a>
+          <a
+            href="https://www.linkedin.com/company/zxsis/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link"
+          >
+            <Linkedin />
+            <span>LinkedIn</span>
+          </a>
+          <a
+            href="https://www.twitter.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link"
+          >
+            <Twitter />
+            <span>Twitter</span>
+          </a>
+          <a
+            href="https://www.dribble.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link"
+          >
+            <Dribbble />
+            <span>Dribble</span>
+          </a>
         </div>
+      </div>
     </div>
   );
 });
 
-
-//-----------------------------------------MAIN HOME PAGE---------------------------------------------------
+//----------------------------------------------------------------------------------------
 const SEO = ({ title, description, keywords }) => (
   <Helmet>
     <title>{title}</title>
@@ -959,6 +1015,8 @@ const SEO = ({ title, description, keywords }) => (
     <meta name="keywords" content={keywords} />
   </Helmet>
 );
+
+// ========================================================================================
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -976,6 +1034,8 @@ const structuredData = {
     "https://www.linkedin.com/company/zxsis",
   ],
 };
+
+//=======================================-MAIN HOME PAGE---==================================================================
 
 export const Home = () => {
   useEffect(() => {
@@ -996,9 +1056,12 @@ export const Home = () => {
     sr.reveal(".faq-head,.copyright-tag , .footer-body-left, .about-content ", {
       origin: "left",
     });
-    sr.reveal(".faq-content ,.footer-logo , .footer-options, .about-image , .footer-socialmedia", {
-      origin: "right",
-    });
+    sr.reveal(
+      ".faq-content ,.footer-logo , .footer-options, .about-image , .footer-socialmedia",
+      {
+        origin: "right",
+      }
+    );
 
     return () => sr.destroy();
   }, []);

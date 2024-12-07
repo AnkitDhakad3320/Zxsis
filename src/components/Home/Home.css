@@ -14,6 +14,7 @@
 html {
   font-size: 16px;
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 @media (max-width: 1200px) {
@@ -266,7 +267,7 @@ body.dark {
 .about-container {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   gap: 1.5rem;
   margin: 0 6rem 6.75rem;
 }
@@ -274,10 +275,11 @@ body.dark {
 .about-content {
   width: 100%;
   max-width: 30.5rem;
+  align-self: flex-start;
 }
 
 .about-heading {
-  font-size: 2.25rem;
+  font-size: 3.5rem;
   font-weight: 500;
   line-height: 4rem;
   letter-spacing: -1%;
@@ -476,6 +478,7 @@ body.dark {
 }
 
 /* ------------------------------------------------------------------------------------- */
+/* Base Styles */
 .portfolio {
   width: 100%;
   overflow-x: hidden;
@@ -496,7 +499,6 @@ body.dark {
   font-size: 3.5rem;
   font-weight: 500;
   line-height: 4rem;
-  letter-spacing: -0.1%;
   text-align: left;
   color: var(--text-strong, #0c111d);
   margin-bottom: 1.5rem;
@@ -511,22 +513,19 @@ body.dark {
   gap: 1.5rem;
   align-items: flex-end;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-end;
   margin-top: 1rem;
 }
 
 .portfolio-btn-container button {
   width: 18rem;
-  height: fit-content;
   padding: 1rem 2rem;
   border-radius: 2rem;
-  border: 1px solid var(--storke-sub, #d0d5dd);
+  border: 1px solid var(--stroke-sub, #d0d5dd);
   background: var(--bg-white, #fff);
   color: var(--text-strong, #0c111d);
   font-size: 1.125rem;
   font-weight: 500;
-  line-height: 1.5rem;
-  letter-spacing: -0.15%;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -539,13 +538,16 @@ body.dark {
 
 .portfolio-card-container {
   width: 100%;
-  height: 26.75rem;
   display: flex;
   justify-content: flex-start;
   gap: 1.5rem;
   flex-wrap: nowrap;
   margin-bottom: 3rem;
-  animation: scrollCards 30s linear infinite;
+  animation: scrollCards 20s linear infinite;
+  padding-right: 1.5rem;
+}
+.portfolio-card-container::-webkit-scrollbar {
+  display: none;
 }
 
 @keyframes scrollCards {
@@ -553,18 +555,13 @@ body.dark {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-50%);
   }
 }
-
 .paused {
   animation-play-state: paused;
   animation: none;
   overflow-x: auto;
-}
-
-.portfolio-card-container::-webkit-scrollbar {
-  display: none;
 }
 
 .portfolio-card {
@@ -577,37 +574,77 @@ body.dark {
   overflow: hidden;
   transition: transform 0.3s;
   display: flex;
+  justify-content: center;
   align-items: flex-end;
-  text-align: center;
-  object-fit: cover;
-  object-position: center;
-  margin-bottom: 1rem;
+  position: relative;
 }
 
 .portfolio-card:hover {
   width: 21.875rem;
+  transition: width 0.3s ease;
 }
 
 .portfolio-image {
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
   object-position: center;
 }
 
-.portfolio-card h3 {
-  font-size: 1.125rem;
-  color: var(--text-color);
-  margin-top: 1rem;
+.card-details {
+  position: absolute;
+  width: 80%;
+  bottom: 24px;
+  padding: 16px 24px;
+  border-radius: 2.5rem;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.8s ease, visibility 0.5s ease;
+  background: var(--static-white, #fff);
 }
 
+.card-link {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  border-radius: 40px;
+  padding: 16px;
+  background: var(--static-white, #fff);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.8s ease, visibility 0.5s ease;
+}
+.portfolio-card:hover .card-details,
+.portfolio-card:hover .card-link {
+  visibility: visible;
+  opacity: 1;
+}
+.card-link:hover {
+  background-color: #d9d9d9;
+}
+.card-heading {
+  color: #0c111d;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+}
+
+.card-about {
+  color: #98a2b3;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  margin-bottom: 20px;
+}
+
+/* ---------------------------------------- */
 .swiperArrow {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 1.5rem 0;
-  height: 4rem;
+  /* margin: 1.5rem 0; */
+  height: 3.5rem;
   width: 15.625rem;
   left: 50%;
   transform: translateX(-50%);
@@ -618,7 +655,7 @@ body.dark {
 .swiper-button-next {
   --swiper-navigation-size: 1.5rem;
   border: 1px solid #007aff;
-  padding: 1.5rem;
+  padding: 1.2rem;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
@@ -628,15 +665,15 @@ body.dark {
 }
 
 .swiper-button-prev {
-  left: -0.625rem;
+  left: -1rem;
 }
 
 .swiper-button-next {
-  left: 0.625rem;
+  left: 1rem;
 }
 
-.dot-container{
-  width:100%;
+.dot-container {
+  width: 100%;
 }
 
 /* ------------------------------------------------------------------- */
@@ -750,8 +787,8 @@ body.dark {
 .faq {
   display: flex;
   flex-wrap: nowrap;
-  margin: 0 3rem;
-  justify-content: space-around;
+  margin: 0 6.75rem;
+  justify-content: space-between;
   gap: 2rem;
 }
 
@@ -875,85 +912,91 @@ body.dark {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.5);
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0; /* shorthand for top, right, bottom, left: 0 */
+  background: rgba(0, 0, 0, 0.8);
   z-index: 1000;
-  gap: 16px;
-  padding: 16px;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .modal-content {
-  width: 90%;
-  max-width: 600px;
+  width: 100%;
   height: auto;
+  max-width: 600px;
   padding: 40px;
   border-radius: 32px;
-  background: var(--bg-white, #fff);
+  background: var(--bg-white);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
   gap: 16px;
-  max-height: 80vh;
   overflow-y: auto;
+}
+
+.modal-content::-webkit-scrollbar {
+  width: 3px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: var(--stroke-sub);
+  border-radius: 10px;
 }
 
 .modal-content-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+  align-items: flex-start;
 }
 
 .modal-content h2 {
-  margin: 0 0 10px 0;
-  font-size: 24px;
+  margin: 0;
+  font-size: 20px;
   font-weight: 600;
-  color: var(--text-strong, #0c111d);
+  color: var(--text-strong);
 }
 
 .modal-content label {
-  display: block;
-  margin: 10px 0;
   font-size: 16px;
-  color: var(--text-strong, #0c111d);
+  color: var(--text-strong);
 }
 
 .modal-content input,
 .modal-content textarea {
   width: 100%;
-  padding: 10px 12px;
+  padding: 10px;
   margin-top: 5px;
-  border-radius: 8px;
   border: 1px solid var(--stroke-sub, #d0d5dd);
-  background: var(--bg-white, #fff);
-  box-shadow: 0px 1px 2px rgba(27, 28, 29, 0.03);
+  border-radius: 8px;
+  background: var(--bg-white);
   font-size: 16px;
+  box-shadow: 0px 1px 2px rgba(27, 28, 29, 0.03);
+}
+
+.modal-content input:focus,
+.modal-content textarea:focus {
+  border-color: var(--primary-darker);
+  outline: none;
 }
 
 .modal-content textarea {
-  height: 148px;
+  min-height: 148px;
+  resize: vertical;
 }
 
 .sendButton {
   padding: 12px 24px;
   border-radius: 36px;
-  background-color: var(--primary-darker, #7d52f4);
+  background-color: var(--primary-darker);
   color: #fff;
-  border: none;
   font-weight: 500;
+  border: none;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
   width: 100%;
-  max-width: 200px;
 }
 
 .sendButton:hover {
-  background-color: #6c4dd3;
+  background-color: var(--primary-darker);
   transform: scale(1.05);
 }
 
@@ -961,25 +1004,19 @@ body.dark {
   transform: scale(0.98);
 }
 
-.cross {
-  margin: 0;
-  padding: 0;
-  cursor: pointer;
-  border: none;
-  background-color: transparent;
-  font-size: 24px;
-  color: var(--text-strong, #0c111d);
-}
-
 .full-name {
   display: flex;
+  flex-wrap: nowrap;
   gap: 8px;
-  margin-top: 8px;
 }
 
 .name {
-  width: 100%;
-  max-width: 300px;
+  flex: 1;
+  min-width: 150px;
+}
+
+.no-scroll {
+  overflow: hidden; /* Prevent scrolling */
 }
 
 /* ========================================================= */
@@ -1053,7 +1090,7 @@ body.dark {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-top: 36px;
+  margin-top: 72px;
 }
 
 .flogo-icon {
@@ -1063,12 +1100,13 @@ body.dark {
 
 .flogo-text {
   font-size: 3.5rem;
+  line-height: 2rem;
   font-weight: 500;
   color: #fff;
 }
 
 .footer-text {
-  margin: 24px 0;
+  margin: 12px 0px 24px;
 }
 
 .footer-text p {
@@ -1189,7 +1227,7 @@ body.dark {
     left: 50%;
   }
   .footer-head-container {
-    margin-bottom: 36px;
+    margin-bottom: 72px;
   }
   .footer-body {
     margin-top: 10px;
@@ -1206,8 +1244,8 @@ body.dark {
   }
 
   .about-heading {
-    font-size: 28px;
-    line-height: 40px;
+    font-size: 48px;
+    line-height: 56px;
   }
 
   .about-text {
@@ -1278,28 +1316,29 @@ body.dark {
   .services-card-text ul li {
     font-size: 14px;
   }
+  .portfolio-container {
+    padding: 0 6.75rem;
+    gap: 2rem;
+  }
+
   .portfolio-header {
-    font-size: 48px;
+    font-size: 3rem;
+    line-height: 3rem;
+  }
+
+  .portfolio-btn-container {
+    gap: 1rem;
   }
 
   .portfolio-btn-container button {
-    width: 200px;
-    font-size: 16px;
+    width: 16rem;
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
   }
-
   .portfolio-card-container {
-    gap: 16px;
+    gap: 1rem;
     flex-wrap: nowrap;
     justify-content: center;
-  }
-
-  .portfolio-card {
-    width: 220px;
-    height: auto;
-  }
-
-  .portfolio-card:hover {
-    width: 280px;
   }
   .faq {
     flex-direction: column;
@@ -1382,6 +1421,7 @@ body.dark {
 
   .footer-heading {
     font-size: 2rem;
+    line-height: 24px;
   }
 
   .footer-button {
@@ -1457,18 +1497,13 @@ body.dark {
   .about-container {
     flex-direction: column;
     justify-content: center;
-    margin: 0 48px 60px;
+    margin: 0 6.75rem 60px;
     gap: 48px;
   }
 
-  .about-container {
-    margin: 0 24px 48px;
-  }
-
   .about-heading {
-    font-size: 24px;
-    line-height: 32px;
-    margin-bottom: 16px;
+    font-size: 40px;
+    line-height: 48px;
   }
 
   .about-text {
@@ -1542,34 +1577,32 @@ body.dark {
     font-size: 12px;
   }
 
-  .portfolio-header {
-    font-size: 36px;
-  }
-
   .portfolio-container {
     flex-direction: column;
     align-items: flex-start;
+    gap: 0px;
+  }
+
+  .portfolio-header {
+    font-size: 3rem;
+    line-height: 3.5rem;
+    text-wrap: nowrap;
+  }
+
+  .portfolio-btn-container {
+    flex-wrap: wrap;
   }
 
   .portfolio-btn-container button {
-    font-size: 14px;
+    width: 14rem;
+    font-size: 0.9rem;
   }
 
   .portfolio-card-container {
-    gap: 12px;
+    gap: 1.5rem;
     flex-wrap: nowrap;
     justify-content: center;
   }
-
-  .portfolio-card {
-    width: 160px;
-    height: auto;
-  }
-
-  .portfolio-card:hover {
-    width: 220px;
-  }
-
   .faq-heading {
     font-size: 2.5rem;
     line-height: 3rem;
@@ -1622,6 +1655,10 @@ body.dark {
   .footer-logo {
     justify-content: center;
   }
+
+  .modal-content {
+    width: 90vw;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1662,8 +1699,8 @@ body.dark {
   }
 
   .about-heading {
-    font-size: 20px;
-    line-height: 28px;
+    font-size: 24px;
+    line-height: 40px;
   }
 
   .about-text {
@@ -1689,20 +1726,15 @@ body.dark {
     grid-template-columns: 1fr;
     gap: 16px;
   }
-
+  .card-heading {
+    font-size: 12px;
+  }
+  .card-about{
+    display: none;
+  }
   .section-card {
     padding: 8px;
     max-width: 100%;
-  }
-
-  .card-text h3 {
-    font-size: 14px;
-    line-height: 20px;
-  }
-
-  .card-text p {
-    font-size: 10px;
-    line-height: 16px;
   }
 
   .services-header h2 {
@@ -1724,6 +1756,47 @@ body.dark {
 
   .services-card-text ul li {
     font-size: 12px;
+  }
+
+  .portfolio-header {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .portfolio-btn-container button {
+    width: 12rem;
+    font-size: 0.8rem;
+    padding: 0.6rem 1rem;
+  }
+
+  .portfolio-card-container {
+    gap: 1rem;
+  }
+
+  .portfolio-card {
+    width: 10rem;
+    height: 15rem;
+  }
+
+  .portfolio-card:hover {
+    width: 11rem;
+  }
+
+  .card-details {
+    bottom: 16px;
+    padding: 12px 16px;
+    font-size: 0.8rem;
+  }
+
+  .card-link {
+    top: 12px;
+    right: 12px;
+    padding: 8px;
+    border-radius: 24px;
+  }
+  .card-link svg{
+    height: 12px;
+    width: 12px;
   }
 
   .faq-heading {
@@ -1794,12 +1867,25 @@ body.dark {
     width: 20.625rem;
     left: 50%;
   }
- 
+  .modal-content {
+    padding: 20px;
+  }
+
+  .sendButton {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+
+  .full-name {
+    flex-wrap: wrap;
+  }
+
+  .modal-content h2 {
+    font-size: 18px;
+  }
 }
 
 /* .text {
   font-size: clamp(12px, 5vw, 24px);  
 } */
-
-/* PortfolioFrame.css */
 
