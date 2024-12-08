@@ -6,6 +6,7 @@ import React, {
   useCallback,
 } from "react";
 import ScrollReveal from "scrollreveal";
+// import { Link,useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import emailjs from "emailjs-com";
@@ -27,6 +28,8 @@ import { ReactComponent as Instagram } from "../images/instagram-line.svg";
 import { ReactComponent as Linkedin } from "../images/linkedin-line.svg";
 import { ReactComponent as Twitter } from "../images/twitter-x-line (1).svg";
 import { ReactComponent as Dribbble } from "../images/dribbble-line.svg";
+import { ReactComponent as BlueQ } from "../images/blue_.svg";
+import { ReactComponent as PinkQ } from "../images/pink_.svg";
 
 import Lottie from "lottie-react";
 // import Lottie from 'react-lottie';
@@ -35,7 +38,7 @@ import UiUx from "../images/video-conference-hover-pinch.json";
 import Saas from "../images/blinking.json";
 import Zx from "../images/zxsis (1).json";
 import Bg from "../images/Main Scene.json";
-import Menu from "../images/EGFPsT6Lbh.json"
+import Menu from "../images/EGFPsT6Lbh.json";
 
 import ThemeToggle from "../Toggle";
 
@@ -49,6 +52,9 @@ import image5 from "../images/image.jpg";
 export const Nav = React.memo((handleSendEmail) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
+
+  // const location = useLocation();
+  // const isActive = (path) => location.pathname === path;
 
   const handleAskQuestion = useCallback(() => {
     setModalOpen(true);
@@ -86,7 +92,7 @@ export const Nav = React.memo((handleSendEmail) => {
   // }, []);
 
   return (
-    <nav>
+    <nav className="nav_container">
       <div className="nav-container">
         <div className="nav-logo">
           <div className="logo-icon">
@@ -95,7 +101,11 @@ export const Nav = React.memo((handleSendEmail) => {
           <h2>ZXSIS</h2>
         </div>
         <div className="nav">
-          <Link to="/" className="navword" aria-label="Home">
+          <Link
+            to="/"
+            className="navword"
+            // {`navword ${isActive("/") ? "active" : ""}`} aria-label="Home"
+          >
             Home
           </Link>
           {["About", "Services", "Portfolio", "Blog"].map((item) => (
@@ -103,6 +113,7 @@ export const Nav = React.memo((handleSendEmail) => {
               key={item}
               to={`/${item.toLowerCase()}`}
               className="navword"
+              // {`navword ${isActive(`/${item.toLowerCase()}`) ? "active" : ""}`}
               aria-label={item}
             >
               {item}
@@ -191,7 +202,10 @@ export function Header({ head, subhead, button }) {
       </div>
       <h1>{head}</h1>
       <p>{subhead}</p>
-      <button>{button}</button>
+      <button>
+        {" "}
+        <Link to="/Services">{button}</Link>
+      </button>
     </header>
   );
 }
@@ -432,8 +446,13 @@ export const Portfolio = () => {
           Projects we <br /> have <span>Completed </span>{" "}
         </div>
         <div className="portfolio-btn-container">
-          <button> Start a new Project</button>
-          <button> View All work</button>
+          <button>
+            <Link to="/About">Start a new Project</Link>{" "}
+          </button>
+          <button>
+            {" "}
+            <Link to="/Portfolio">View All work</Link>
+          </button>
         </div>
       </div>
 
@@ -458,12 +477,8 @@ export const Portfolio = () => {
               <p className="card-about">{item.detail}</p>
             </div>
             <div className="card-link">
-              <a
-                href={item.link}
-                className="cardlinkto"
-                target="_self" 
-              >
-                <Addlink/>
+              <a href={item.link} className="cardlinkto" target="_self">
+                <Addlink />
               </a>
             </div>
           </div>
@@ -613,7 +628,7 @@ export const Testimonial = () => {
         </div>
         <div className="swiper mySwiper">
           <div className="swiper-wrapper testimonial-cards">
-            {testimonials.map((testimonial) => (
+            {testimonials.map((testimonial, index) => (
               <div
                 className="swiper-slide testimonial-card"
                 key={testimonial.id}
@@ -621,18 +636,7 @@ export const Testimonial = () => {
                 <div className="testimonial-card-content">
                   <div className="testimonial-card-image">
                     <span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="48"
-                        height="40"
-                        viewBox="0 0 48 40"
-                        fill="none"
-                      >
-                        <path
-                          d="M9.68264 40C7.03714 40 4.762 38.9418 2.85724 36.8254C0.95248 34.709 9.91821e-05 31.9577 9.91821e-05 28.5714C9.91821e-05 24.9735 0.793747 21.2698 2.38105 17.4603C3.86253 13.7566 5.92603 10.3704 8.57153 7.30159C11.217 4.2328 14.2329 1.79894 17.6191 0L21.4287 7.14286C18.7832 9.15344 16.6139 11.164 14.9207 13.1746C13.1218 15.1852 11.9578 17.7249 11.4287 20.7936C13.4393 20.8995 15.2911 21.9048 16.9842 23.8095C18.5715 25.8201 19.3652 27.9894 19.3652 30.3175C19.3652 31.9048 18.9419 33.4392 18.0953 34.9206C17.143 36.4021 15.926 37.619 14.4445 38.5714C12.9631 39.5238 11.3758 40 9.68264 40ZM36.0318 40C33.3863 40 31.1112 38.9418 29.2064 36.8254C27.1959 34.709 26.1906 31.9577 26.1906 28.5714C26.1906 24.9735 26.9842 21.2698 28.5715 17.4603C30.1588 13.7566 32.2752 10.3704 34.9207 7.30159C37.5662 4.2328 40.5821 1.79894 43.9683 0L47.6191 7.14286C45.0795 9.15344 42.9631 11.164 41.2699 13.1746C39.471 15.1852 38.3599 17.7249 37.9366 20.7936C39.2064 20.8995 40.4234 21.3757 41.5874 22.2222C42.7514 23.1746 43.7567 24.3915 44.6033 25.873C45.344 27.3545 45.7144 28.836 45.7144 30.3175C45.7144 31.9048 45.2911 33.4392 44.4445 34.9206C43.4922 36.4021 42.2752 37.619 40.7937 38.5714C39.3123 39.5238 37.725 40 36.0318 40Z"
-                          fill="#63C5EA"
-                        />
-                      </svg>
+                      <span>{index % 2 === 0 ? <BlueQ /> : <PinkQ />}</span>
                     </span>
                   </div>
                   <div className="testimonial-card-text">
@@ -790,8 +794,8 @@ const Modal = ({ isOpen, onClose }) => {
   });
 
   const [errors, setErrors] = useState({});
-  const [isSending, setIsSending] = useState(false); 
-  const [successMessage, setSuccessMessage] = useState(""); 
+  const [isSending, setIsSending] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
 
   // Handle input change
   const handleChange = (e) => {
@@ -841,12 +845,12 @@ const Modal = ({ isOpen, onClose }) => {
           (result) => {
             console.log("Email sent:", result.text);
             setSuccessMessage("Email sent successfully!");
-          setIsSending(false);
-          resetForm();
-          setTimeout(() => {
-            setSuccessMessage("");
-            onClose();
-          }, 3000);
+            setIsSending(false);
+            resetForm();
+            setTimeout(() => {
+              setSuccessMessage("");
+              onClose();
+            }, 3000);
           },
           (error) => {
             console.error("Email sending failed:", error.text);
@@ -951,9 +955,11 @@ const Modal = ({ isOpen, onClose }) => {
           {errors.question && <p style={{ color: "red" }}>{errors.question}</p>}
 
           <button type="submit" className="sendButton">
-          {isSending ? "Sending..." : "Send"}
+            {isSending ? "Sending..." : "Send"}
           </button>
-          {successMessage && <p className="success-message">{successMessage}</p>}
+          {successMessage && (
+            <p className="success-message">{successMessage}</p>
+          )}
         </div>
       </form>
     </div>
