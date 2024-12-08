@@ -6,7 +6,6 @@ import React, {
   useCallback,
 } from "react";
 import ScrollReveal from "scrollreveal";
-// import SwiperComponent from "../swiper";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import emailjs from "emailjs-com";
@@ -36,6 +35,7 @@ import UiUx from "../images/video-conference-hover-pinch.json";
 import Saas from "../images/blinking.json";
 import Zx from "../images/zxsis (1).json";
 import Bg from "../images/Main Scene.json";
+import Menu from "../images/EGFPsT6Lbh.json"
 
 import ThemeToggle from "../Toggle";
 
@@ -46,39 +46,44 @@ import image4 from "../images/image (3).png";
 import image5 from "../images/image.jpg";
 
 // Memoized Nav component
-export const Nav = React.memo(() => {
+export const Nav = React.memo((handleSendEmail) => {
   const [isModalOpen, setModalOpen] = useState(false);
+  const [isMenuOpen, setMenuOpen] = useState(false);
 
   const handleAskQuestion = useCallback(() => {
     setModalOpen(true);
   }, []);
 
-  // Optimized handleSendEmail function
-  const handleSendEmail = useCallback(async (subject, question) => {
-    if (!subject || !question) {
-      console.error("All fields must be filled out");
-      return;
-    }
-
-    try {
-      const response = await fetch("http://localhost:5000/send-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: "ankitdhakad4801@gmail.com",
-          subject,
-          question,
-        }),
-      });
-
-      const data = await response.json();
-      console.log("Email sent successfully", data);
-    } catch (error) {
-      console.error("Error sending email:", error.message || error);
-    }
+  const toggleMenu = useCallback(() => {
+    setMenuOpen((prev) => !prev);
   }, []);
+
+  // Optimized handleSendEmail function
+  // const handleSendEmail = useCallback(async (subject, question) => {
+  //   if (!subject || !question) {
+  //     console.error("All fields must be filled out");
+  //     return;
+  //   }
+
+  //   try {
+  //     const response = await fetch("http://localhost:5000/send-email", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         email: "ankitdhakad4801@gmail.com",
+  //         subject,
+  //         question,
+  //       }),
+  //     });
+
+  //     const data = await response.json();
+  //     console.log("Email sent successfully", data);
+  //   } catch (error) {
+  //     console.error("Error sending email:", error.message || error);
+  //   }
+  // }, []);
 
   return (
     <nav>
@@ -111,7 +116,43 @@ export const Nav = React.memo(() => {
             Get a Quote
           </button>
         </div>
+        <div className="menu">
+          <button
+            className="menu-button"
+            aria-label="Menu"
+            onClick={toggleMenu}
+          >
+            <Lottie animationData={Menu} />
+          </button>
+        </div>
       </div>
+      {isMenuOpen && (
+        <div className="menu-list">
+          <Link to="/" className="menu-item" onClick={toggleMenu}>
+            Home
+          </Link>
+          {["About", "Services", "Portfolio", "Blog"].map((item) => (
+            <Link
+              key={item}
+              to={`/${item.toLowerCase()}`}
+              className="menu-item"
+              onClick={toggleMenu}
+            >
+              {item}
+            </Link>
+          ))}
+          <button
+            className="menu-quote-button"
+            onClick={() => {
+              toggleMenu();
+              handleAskQuestion();
+            }}
+          >
+            Get a Quote
+          </button>
+        </div>
+      )}
+
       <div className="navModal">
         <Modal
           className="navModal"
@@ -749,6 +790,8 @@ const Modal = ({ isOpen, onClose }) => {
   });
 
   const [errors, setErrors] = useState({});
+  const [isSending, setIsSending] = useState(false); 
+  const [successMessage, setSuccessMessage] = useState(""); 
 
   // Handle input change
   const handleChange = (e) => {
@@ -797,11 +840,17 @@ const Modal = ({ isOpen, onClose }) => {
         .then(
           (result) => {
             console.log("Email sent:", result.text);
-            resetForm();
+            setSuccessMessage("Email sent successfully!");
+          setIsSending(false);
+          resetForm();
+          setTimeout(() => {
+            setSuccessMessage("");
             onClose();
+          }, 3000);
           },
           (error) => {
             console.error("Email sending failed:", error.text);
+            setIsSending(false);
           }
         );
     }
@@ -902,14 +951,14 @@ const Modal = ({ isOpen, onClose }) => {
           {errors.question && <p style={{ color: "red" }}>{errors.question}</p>}
 
           <button type="submit" className="sendButton">
-            Send
+          {isSending ? "Sending..." : "Send"}
           </button>
+          {successMessage && <p className="success-message">{successMessage}</p>}
         </div>
       </form>
     </div>
   );
 };
-
 export default Modal;
 
 //==========================================FOOTER====================================================

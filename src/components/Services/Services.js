@@ -25,8 +25,6 @@ export const ServiceWelcome = ({quotes,headers,greets}) => {
     )
 };
 
-
-
 export const ImageComponent = ()=>{
   return(
       <div className=" image-conatiner">
@@ -96,7 +94,7 @@ const cardData = [
   ];
     return (
         <div className="services">
-        <Nav/>
+        <Nav className="navbar"/>
         <ServiceWelcome className="welcome"
             quotes={"Our services"}
             headers={<div>Transforming Your Vision into <span>Impactful Design </span> <br></br>and<span> Development Solutions</span></div>}
