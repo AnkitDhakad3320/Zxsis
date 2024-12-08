@@ -30,9 +30,13 @@ import { ReactComponent as Twitter } from "../images/twitter-x-line (1).svg";
 import { ReactComponent as Dribbble } from "../images/dribbble-line.svg";
 import { ReactComponent as BlueQ } from "../images/blue_.svg";
 import { ReactComponent as PinkQ } from "../images/pink_.svg";
+import { ReactComponent as LogoDark } from "../images/text (dark).svg";
+import { ReactComponent as LogoLight } from "../images/text (light).svg";
+import { ReactComponent as LogoFF } from "../images/textz.svg";
 
 import Lottie from "lottie-react";
 // import Lottie from 'react-lottie';
+// import FooterLogo from "../images/Main footers.json";
 import Animation from "../images/camera-hover-flash.json";
 import UiUx from "../images/video-conference-hover-pinch.json";
 import Saas from "../images/blinking.json";
@@ -40,18 +44,21 @@ import Zx from "../images/zxsis (1).json";
 import Bg from "../images/Main Scene.json";
 import Menu from "../images/EGFPsT6Lbh.json";
 
-import ThemeToggle from "../Toggle";
+// import ThemeToggle from "../Toggle";
+import ThemeToggle from '../ThemeToggle.js';
+import { useTheme } from '../ThemeContext.js';
+
 
 import image1 from "../images/image.png";
 import image2 from "../images/image (1).png";
 import image3 from "../images/image (2).png";
 import image4 from "../images/image (3).png";
 import image5 from "../images/image.jpg";
-
 // Memoized Nav component
 export const Nav = React.memo((handleSendEmail) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const { isDarkMode } = useTheme();
 
   // const location = useLocation();
   // const isActive = (path) => location.pathname === path;
@@ -98,7 +105,7 @@ export const Nav = React.memo((handleSendEmail) => {
           <div className="logo-icon">
             <Lottie animationData={Zx} />
           </div>
-          <h2>ZXSIS</h2>
+          {isDarkMode ? <LogoDark />:<LogoLight/>}
         </div>
         <div className="nav">
           <Link
@@ -985,8 +992,11 @@ export const Footer = React.memo(() => {
       <div className="footer-logo">
         <div className="flogo-icon">
           <Flogo />
+         
         </div>
-        <div className="flogo-text">ZXSIS</div>
+        <div className="flogo-text"><LogoFF/>
+        {/* <Lottie animationData={FooterLogo} /> */}
+        </div>
         <ThemeToggle />
       </div>
       <div className="footer-body">

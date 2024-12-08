@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
+import { ThemeProvider } from './components/ThemeContext';
+
 import "./App.css";
 import { About } from "./components/About/About";
 import { Home } from "./components/Home/Home";
@@ -11,6 +13,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
       <ScrollToTop />
+      <ThemeProvider>
         <Routes>
           <Route path="/" index element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -19,6 +22,7 @@ function App() {
 
           {/* <Route path="/services" element={<Services/>}/> */}
         </Routes>
+        </ThemeProvider>
       </BrowserRouter>
     </div>
   );
