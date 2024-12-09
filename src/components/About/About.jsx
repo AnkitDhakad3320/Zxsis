@@ -1,5 +1,8 @@
 import { Footer, Nav } from "../Home/Home"
-// import "./About.css";
+import "./About.css";
+
+import { ReactComponent as AboutArrow } from "./About_Image/AboutArrow.svg"
+import { ReactComponent as ElementEleven } from "./About_Image/ElementEleven.svg"
 
 export const Welcome = ({quote , header ,greet}) => {
     return (
@@ -7,22 +10,24 @@ export const Welcome = ({quote , header ,greet}) => {
         <div className="about-greet">{quote}</div>
         <div className="about-tagline">{header} </div>
         <div className="about-greet-text">{greet}</div>
+        <div className="about-arrow"><AboutArrow/></div>
+        <div className="element-eleven"><ElementEleven/></div>
         </div>
     )
-}
+};
 
 export const AboutSec = () =>{
     return(
         <div className="about-sec">
             <div className="about-sec-text">
-                <div>We pride ourselves on our team of<br/> skilled <span>Designers</span> and <span>Developers</span></div>
+                <div>We pride ourselves on our team of skilled <span>Designers</span> and <span>Developers</span></div>
                 <p>Each member of our team brings a unique set of talents and expertise, allowing us to approach every project with a fresh perspective. Our creative process involves in-depth discussions with you to understand your needs and objectives, ensuring that every design element is purposeful and aligns with your business goals.</p>
             </div>
             <div className="about-sec-image">
             </div>
         </div>
     )
-}
+};
 
 
 export const OurTeam = () => {
@@ -45,7 +50,7 @@ export const OurTeam = () => {
         </div>
         </div>
     )
-}
+};
 
 export const Lastabout = ( ) => {
     return (
@@ -63,14 +68,10 @@ export const Lastabout = ( ) => {
                 <label>Email Address</label><br/><input type="email" placeholder="hello@destkit.com"></input>
                 </div>
                 <button>Contact us now</button>
-
                 </div>
             </div>
-
         </div>
-    )
-}
-
+    )}
 
 export const About = ()=>{
     return (
@@ -86,7 +87,6 @@ export const About = ()=>{
             <AboutSec/>
             <OurTeam/>
             <Lastabout/>
-            {/* <TestimonialsSwiper/> */}
             <Footer/>
         </div>
     )

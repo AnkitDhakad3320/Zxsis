@@ -18,9 +18,11 @@ function App() {
           <Route path="/" index element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
+          {/* <Route path="/Portfolio" element={<Portfolio />} /> */}
+          {/* <Route path="/Blog" element={<Blog />} /> */}
           <Route path="*" element={<NoPage/>} />
 
-          {/* <Route path="/services" element={<Services/>}/> */}
+          {/* <Route path="/services" element={<Services/>}/>*/}
         </Routes>
         </ThemeProvider>
       </BrowserRouter>

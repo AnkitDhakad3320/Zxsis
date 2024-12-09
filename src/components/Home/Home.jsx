@@ -32,11 +32,11 @@ import { ReactComponent as BlueQ } from "../images/blue_.svg";
 import { ReactComponent as PinkQ } from "../images/pink_.svg";
 import { ReactComponent as LogoDark } from "../images/text (dark).svg";
 import { ReactComponent as LogoLight } from "../images/text (light).svg";
-import { ReactComponent as LogoFF } from "../images/textz.svg";
+// import { ReactComponent as LogoFF } from "../images/textz.svg";
 
 import Lottie from "lottie-react";
 // import Lottie from 'react-lottie';
-// import FooterLogo from "../images/Main footers.json";
+import FooterLogo from "../images/Main foot.json";
 import Animation from "../images/camera-hover-flash.json";
 import UiUx from "../images/video-conference-hover-pinch.json";
 import Saas from "../images/blinking.json";
@@ -54,205 +54,10 @@ import image2 from "../images/image (1).png";
 import image3 from "../images/image (2).png";
 import image4 from "../images/image (3).png";
 import image5 from "../images/image.jpg";
-// Memoized Nav component
-export const Nav = React.memo((handleSendEmail) => {
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [isMenuOpen, setMenuOpen] = useState(false);
-  const { isDarkMode } = useTheme();
 
-  // const location = useLocation();
-  // const isActive = (path) => location.pathname === path;
 
-  const handleAskQuestion = useCallback(() => {
-    setModalOpen(true);
-  }, []);
 
-  const toggleMenu = useCallback(() => {
-    setMenuOpen((prev) => !prev);
-  }, []);
-
-  // Optimized handleSendEmail function
-  // const handleSendEmail = useCallback(async (subject, question) => {
-  //   if (!subject || !question) {
-  //     console.error("All fields must be filled out");
-  //     return;
-  //   }
-
-  //   try {
-  //     const response = await fetch("http://localhost:5000/send-email", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         email: "ankitdhakad4801@gmail.com",
-  //         subject,
-  //         question,
-  //       }),
-  //     });
-
-  //     const data = await response.json();
-  //     console.log("Email sent successfully", data);
-  //   } catch (error) {
-  //     console.error("Error sending email:", error.message || error);
-  //   }
-  // }, []);
-
-  return (
-    <nav className="nav_container">
-      <div className="nav-container">
-        <div className="nav-logo">
-          <div className="logo-icon">
-            <Lottie animationData={Zx} />
-          </div>
-          {isDarkMode ? <LogoDark />:<LogoLight/>}
-        </div>
-        <div className="nav">
-          <Link
-            to="/"
-            className="navword"
-            // {`navword ${isActive("/") ? "active" : ""}`} aria-label="Home"
-          >
-            Home
-          </Link>
-          {["About", "Services", "Portfolio", "Blog"].map((item) => (
-            <Link
-              key={item}
-              to={`/${item.toLowerCase()}`}
-              className="navword"
-              // {`navword ${isActive(`/${item.toLowerCase()}`) ? "active" : ""}`}
-              aria-label={item}
-            >
-              {item}
-            </Link>
-          ))}
-          <button
-            className="quote-button"
-            onClick={handleAskQuestion}
-            aria-label="Get a Quote"
-          >
-            Get a Quote
-          </button>
-        </div>
-        <div className="menu">
-          <button
-            className="menu-button"
-            aria-label="Menu"
-            onClick={toggleMenu}
-          >
-            <Lottie animationData={Menu} />
-          </button>
-        </div>
-      </div>
-      {isMenuOpen && (
-        <div className="menu-list">
-          <Link to="/" className="menu-item" onClick={toggleMenu}>
-            Home
-          </Link>
-          {["About", "Services", "Portfolio", "Blog"].map((item) => (
-            <Link
-              key={item}
-              to={`/${item.toLowerCase()}`}
-              className="menu-item"
-              onClick={toggleMenu}
-            >
-              {item}
-            </Link>
-          ))}
-          <button
-            className="menu-quote-button"
-            onClick={() => {
-              toggleMenu();
-              handleAskQuestion();
-            }}
-          >
-            Get a Quote
-          </button>
-        </div>
-      )}
-
-      <div className="navModal">
-        <Modal
-          className="navModal"
-          isOpen={isModalOpen}
-          onClose={() => setModalOpen(false)}
-          onSend={handleSendEmail}
-        />
-      </div>
-    </nav>
-  );
-});
-
-// LottieComponent for Background Animation
-export const LottieComponent = React.memo(() => {
-  const animationSpeed = 0.2;
-
-  return (
-    <div>
-      <Lottie
-        animationData={Bg}
-        loop={true}
-        autoplay={true}
-        speed={animationSpeed}
-        style={{ opacity: ".05" }}
-      />
-    </div>
-  );
-});
-
-// Header Component
-export function Header({ head, subhead, button }) {
-  return (
-    <header className="app-header">
-      <div className="background-container">
-        <LottieComponent />
-      </div>
-      <h1>{head}</h1>
-      <p>{subhead}</p>
-      <button>
-        {" "}
-        <Link to="/Services">{button}</Link>
-      </button>
-    </header>
-  );
-}
-// ===================================== ABOUTSECTION ===============================================
-
-export function AboutSection({
-  heading,
-  subheading,
-  content,
-  imageUrl,
-  fallbackImage,
-}) {
-  // const fallbackImage = "https://via.placeholder.com/400";
-  return (
-    <div className="about-container">
-      <div className="about-content">
-        <div className="about-heading">
-          <h1>{heading}</h1>
-        </div>
-        <div className="about-text">
-          <p>{subheading}</p>
-          <p>{content}</p>
-        </div>
-      </div>
-
-      <div className="about-image-wrapper">
-        <img
-          className="about-image"
-          src={imageUrl || fallbackImage}
-          alt="About Us"
-          loading="lazy"
-          width="400"
-          height="auto"
-        />
-      </div>
-    </div>
-  );
-}
-
-// ==================================DATA====================================================
+// ======================================DATA====================================================
 
 const cardData = [
   {
@@ -280,31 +85,7 @@ const cardData = [
   },
 ];
 
-// ==========================================SECTION===================================================
-
-export const Section = ({ title, subtitle, cards }) => {
-  return (
-    <div className="section-container">
-      <div className="section-content">
-        <div className="section-heading">{title} </div>
-        <div className="section-sub-heading">{subtitle}</div>
-      </div>
-      <div className="card-container">
-        {cards.map((item, index) => (
-          <div className="section-card" key={index}>
-            <span className={`icon ${item.icon}`}>{item.icon} </span>{" "}
-            <div className="card-text">
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-// ===============================DATA========================================
+// ======================================DATA=====================================================
 
 const serviceData = [
   {
@@ -336,37 +117,7 @@ const serviceData = [
   },
 ];
 
-// -----------------------SERVICES---------------------------------------
-
-export const OurServices = () => {
-  return (
-    <div className="services">
-      <div className="services-header">
-        <h2>Our Services</h2>
-        <p>We provide you simple and effective solutions.</p>
-      </div>
-      <div className="services-container">
-        <div className="services-grid">
-          {serviceData.map((service, index) => (
-            <div className="services-card" key={index}>
-              <div className="services-card-icon">
-                <Lottie className="servicesIcon" animationData={service.icon} />
-              </div>
-              <h3>{service.title}</h3>
-              <ul className="services-card-text">
-                {service.descriptions.map((desc, idx) => (
-                  <li key={idx}>{desc}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// ============================DATA===========================================================
+// ======================================DATA=====================================================
 
 const portfolioData = [
   {
@@ -442,60 +193,7 @@ const portfolioData = [
   },
 ];
 
-// =========================PORTFOLIO======================================================
-
-export const Portfolio = () => {
-  const [isHover, setIsHover] = useState(false);
-  return (
-    <div className="portfolio">
-      <div className="portfolio-container">
-        <div className="portfolio-header">
-          Projects we <br /> have <span>Completed </span>{" "}
-        </div>
-        <div className="portfolio-btn-container">
-          <button>
-            <Link to="/About">Start a new Project</Link>{" "}
-          </button>
-          <button>
-            {" "}
-            <Link to="/Portfolio">View All work</Link>
-          </button>
-        </div>
-      </div>
-
-      <div
-        className={`portfolio-card-container ${isHover ? "paused" : ""}`}
-        onMouseEnter={() => setIsHover(true)}
-        onMouseLeave={() => setIsHover(false)}
-      >
-        {portfolioData.map((item) => (
-          <div className="portfolio-card" key={item.id}>
-            <img
-              src={item.image}
-              alt={item.title}
-              loading="lazy"
-              className="portfolio-image"
-              // onError={(e) => {
-              //   e.target.src = "./assets/default.jpg";
-              // }} // Optional fallback image
-            />
-            <div className="card-details">
-              <h2 className="card-heading">{item.title}</h2>
-              <p className="card-about">{item.detail}</p>
-            </div>
-            <div className="card-link">
-              <a href={item.link} className="cardlinkto" target="_self">
-                <Addlink />
-              </a>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-// =================================DATA================================
+// ======================================DATA=====================================================
 
 const testimonials = [
   {
@@ -504,7 +202,7 @@ const testimonials = [
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     name: "John Doe",
     location: "USA",
-    image: "https://images.unsplash.com/photo-1526748072370-e1f39e3a42b1",
+    image: "https://plus.unsplash.com/premium_photo-1664536392896-cd1743f9c02c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGVyc29ufGVufDB8fDB8fHww",
   },
   {
     id: 2,
@@ -512,7 +210,7 @@ const testimonials = [
     text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
     name: "Jane Smith",
     location: "Canada",
-    image: "https://images.unsplash.com/photo-1494231242351-0529f0d23109",
+    image: "https://images.unsplash.com/photo-1445053023192-8d45cb66099d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     id: 3,
@@ -520,7 +218,7 @@ const testimonials = [
     text: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     name: "Mike Johnson",
     location: "UK",
-    image: "https://images.unsplash.com/photo-1518600901238-5e4a4c7d62a7",
+    image: "https://plus.unsplash.com/premium_photo-1689539137236-b68e436248de?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     id: 4,
@@ -528,7 +226,7 @@ const testimonials = [
     text: "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     name: "Sara Lee",
     location: "Australia",
-    image: "https://images.unsplash.com/photo-1530525711224-6f6c9ccf37a5",
+    image: "https://images.unsplash.com/photo-1521566652839-697aa473761a?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     id: 5,
@@ -536,7 +234,7 @@ const testimonials = [
     text: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
     name: "Chris Evans",
     location: "USA",
-    image: "path/to/image5.jpg",
+    image: "https://plus.unsplash.com/premium_photo-1690407617686-d449aa2aad3c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     id: 6,
@@ -544,7 +242,7 @@ const testimonials = [
     text: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum.",
     name: "Emma Watson",
     location: "UK",
-    image: "path/to/image6.jpg",
+    image: "https://plus.unsplash.com/premium_photo-1671656349322-41de944d259b?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     id: 7,
@@ -552,7 +250,7 @@ const testimonials = [
     text: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.",
     name: "Daniel Craig",
     location: "UK",
-    image: "path/to/image7.jpg",
+    image: "https://plus.unsplash.com/premium_photo-1664541336692-e931d407ba88?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     id: 8,
@@ -560,133 +258,11 @@ const testimonials = [
     text: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
     name: "Scarlett Johansson",
     location: "USA",
-    image: "path/to/image8.jpg",
+    image: "https://plus.unsplash.com/premium_photo-1689977968861-9c91dbb16049?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
 ];
 
-//=============================TESTIMONIAL=================================================
-
-export const Testimonial = () => {
-  const swiperRef = useRef(null);
-
-  useEffect(() => {
-    const loadSwiper = () => {
-      const cssLink = document.createElement("link");
-      cssLink.rel = "stylesheet";
-      cssLink.href =
-        "https://cdn.jsdelivr.net/npm/swiper@latest/swiper-bundle.min.css";
-      document.head.appendChild(cssLink);
-
-      const script = document.createElement("script");
-      script.src =
-        "https://cdn.jsdelivr.net/npm/swiper@latest/swiper-bundle.min.js";
-      script.onload = () => {
-        swiperRef.current = new window.Swiper(".mySwiper", {
-          slidesPerView: 1,
-          loop: true,
-          spaceBetween: 12,
-          pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-          },
-          navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-          },
-          breakpoints: {
-            768: {
-              slidesPerView: 2,
-            },
-          },
-        });
-
-        // Automatic slide transition
-        const interval = setInterval(() => {
-          swiperRef.current.slideNext();
-        }, 5000);
-
-        return () => clearInterval(interval);
-      };
-      document.body.appendChild(script);
-    };
-
-    loadSwiper();
-
-    return () => {
-      const swiperScript = document.querySelector(
-        'script[src="https://cdn.jsdelivr.net/npm/swiper@latest/swiper-bundle.min.js"]'
-      );
-      if (swiperScript) {
-        document.body.removeChild(swiperScript);
-      }
-    };
-  }, []);
-
-  return (
-    <div className="testimonial-container">
-      <div className="testimonial-header">
-        What our <br />
-        <span>Satisfied clients</span> say
-      </div>
-      <div style={{ position: "relative" }}>
-        <div className="middle-rule">
-          <div className="rule rule-div"></div>
-          <div className="rule-div"></div>
-        </div>
-        <div className="swiper mySwiper">
-          <div className="swiper-wrapper testimonial-cards">
-            {testimonials.map((testimonial, index) => (
-              <div
-                className="swiper-slide testimonial-card"
-                key={testimonial.id}
-              >
-                <div className="testimonial-card-content">
-                  <div className="testimonial-card-image">
-                    <span>
-                      <span>{index % 2 === 0 ? <BlueQ /> : <PinkQ />}</span>
-                    </span>
-                  </div>
-                  <div className="testimonial-card-text">
-                    <div className="testimonial-text-head">
-                      {testimonial.quote}
-                    </div>
-                    <div className="testimonial-text-para">
-                      {testimonial.text}
-                    </div>
-                    <div className="testimonial-detail">
-                      <div
-                        className="testimonial-details-image"
-                        style={{ backgroundImage: `url(${testimonial.image})` }}
-                      ></div>
-                      <div className="testimonial-details-name">
-                        <h4>{testimonial.name}</h4>
-                        <h5>{testimonial.location}</h5>
-                      </div>
-                    </div>
-                  </div>
-                </div>{" "}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-      {/* Pagination and Navigation */}
-      <div className="dot-container">
-        <div className="swiperArrow">
-          <div className="swiper-pagination"></div>
-          <div className="swiper-button-prev swipe-left">
-            {/* <ArrowLeft /> */}
-          </div>
-          <div className="swiper-button-next swipe-right">
-            {/* <ArrowRight /> */}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// ======================================Data================================================
+// ======================================Data======================================================
 
 const faqs = [
   {
@@ -711,85 +287,7 @@ const faqs = [
   },
 ];
 
-// ------------------------------FAQ------------------------------------------
-
-const FaqCard = ({ question, answer, isOpen, onToggle }) => (
-  <div className="faq-card">
-    <div className="faq-slide" onClick={onToggle}>
-      <div className="faq-card-text">{question}</div>
-      <div className="faq-card-icon">
-        {isOpen ? <CloseCircle /> : <AddCircle />}
-      </div>
-    </div>
-    {isOpen && (
-      <div className="faq-open">
-        <hr />
-        <div className="faq-query">
-          <p>{answer}</p>
-        </div>
-      </div>
-    )}
-  </div>
-);
-
-// --------------------------------------------------------------------------
-
-export const Faq = () => {
-  const [openIndex, setOpenIndex] = useState(null);
-  const [isModalOpen, setModalOpen] = useState(false);
-
-  const handleToggle = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
-  const handleAskQuestion = () => {
-    setModalOpen(true);
-  };
-
-  const handleSendEmail = (email, subject, question) => {
-    console.log(
-      `Sending email to: ${email},Subject: ${subject} , Question: ${question}`
-    );
-  };
-
-  return (
-    <>
-      <div className="faq">
-        <div className="faq-head">
-          <div className="faq-heading">FAQ</div>
-          <div className="faq-text">
-            Can't find the answers you're looking for? Ask us and get answer in
-            24 hrs.
-          </div>
-          <button className="faq-button" onClick={handleAskQuestion}>
-            Ask a question
-          </button>
-        </div>
-        <div className="faq-content">
-          {faqs.map((faq, index) => (
-            <FaqCard
-              key={index}
-              question={faq.question}
-              answer={faq.answer}
-              isOpen={openIndex === index}
-              onToggle={() => handleToggle(index)}
-            />
-          ))}
-        </div>
-      </div>
-
-      <div className="modal-overlay">
-        <Modal
-          isOpen={isModalOpen}
-          onClose={() => setModalOpen(false)}
-          onSend={handleSendEmail}
-        />
-      </div>
-    </>
-  );
-};
-
-//==============================MODAL=============================
+//=======================================MODAL=====================================================
 
 const Modal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
@@ -974,7 +472,523 @@ const Modal = ({ isOpen, onClose }) => {
 };
 export default Modal;
 
-//==========================================FOOTER====================================================
+// LottieComponent for Background Animation
+
+export const LottieComponent = React.memo(() => {
+  const animationSpeed = 0.2;
+
+  return (
+    <div>
+      <Lottie
+        animationData={Bg}
+        loop={true}
+        autoplay={true}
+        speed={animationSpeed}
+        style={{ opacity: ".05" }}
+      />
+    </div>
+  );
+});
+
+
+// Memoized Nav component
+
+export const Nav = React.memo((handleSendEmail) => {
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [isMenuOpen, setMenuOpen] = useState(false);
+  const { isDarkMode } = useTheme();
+
+  // const location = useLocation();
+  // const isActive = (path) => location.pathname === path;
+
+  const handleAskQuestion = useCallback(() => {
+    setModalOpen(true);
+  }, []);
+
+  const toggleMenu = useCallback(() => {
+    setMenuOpen((prev) => !prev);
+  }, []);
+
+  // Optimized handleSendEmail function
+  // const handleSendEmail = useCallback(async (subject, question) => {
+  //   if (!subject || !question) {
+  //     console.error("All fields must be filled out");
+  //     return;
+  //   }
+
+  //   try {
+  //     const response = await fetch("http://localhost:5000/send-email", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         email: "ankitdhakad4801@gmail.com",
+  //         subject,
+  //         question,
+  //       }),
+  //     });
+
+  //     const data = await response.json();
+  //     console.log("Email sent successfully", data);
+  //   } catch (error) {
+  //     console.error("Error sending email:", error.message || error);
+  //   }
+  // }, []);
+
+  return (
+    <nav className="nav_container">
+      <div className="nav-container">
+        <div className="nav-logo">
+          <div className="logo-icon">
+            <Lottie animationData={Zx} />
+          </div>
+          {isDarkMode ? <LogoDark />:<LogoLight/>}
+        </div>
+        <div className="nav">
+          <Link
+            to="/"
+            className="navword"
+            // {`navword ${isActive("/") ? "active" : ""}`} aria-label="Home"
+          >
+            Home
+          </Link>
+          {["About", "Services", "Portfolio", "Blog"].map((item) => (
+            <Link
+              key={item}
+              to={`/${item.toLowerCase()}`}
+              className="navword"
+              // {`navword ${isActive(`/${item.toLowerCase()}`) ? "active" : ""}`}
+              aria-label={item}
+            >
+              {item}
+            </Link>
+          ))}
+          <button
+            className="quote-button"
+            onClick={handleAskQuestion}
+            aria-label="Get a Quote"
+          >
+            Get a Quote
+          </button>
+        </div>
+        <div className="menu">
+          <button
+            className="menu-button"
+            aria-label="Menu"
+            onClick={toggleMenu}
+          >
+            <Lottie animationData={Menu} />
+          </button>
+        </div>
+      </div>
+      {isMenuOpen && (
+        <div className="menu-list">
+          <Link to="/" className="menu-item" onClick={toggleMenu}>
+            Home
+          </Link>
+          {["About", "Services", "Portfolio", "Blog"].map((item) => (
+            <Link
+              key={item}
+              to={`/${item.toLowerCase()}`}
+              className="menu-item"
+              onClick={toggleMenu}
+            >
+              {item}
+            </Link>
+          ))}
+          <button
+            className="menu-quote-button"
+            onClick={() => {
+              toggleMenu();
+              handleAskQuestion();
+            }}
+          >
+            Get a Quote
+          </button>
+        </div>
+      )}
+
+      <div className="navModal">
+        <Modal
+          className="navModal"
+          isOpen={isModalOpen}
+          onClose={() => setModalOpen(false)}
+          onSend={handleSendEmail}
+        />
+      </div>
+    </nav>
+  );
+});
+
+// ======================================Header Component==============================================
+
+export function Header({ head, subhead, button }) {
+  return (
+    <header className="app-header">
+      <div className="background-container">
+        <LottieComponent />
+      </div>
+      <h1>{head}</h1>
+      <p>{subhead}</p>
+      <button>
+        {" "}
+        <Link to="/Services">{button}</Link>
+      </button>
+    </header>
+  );
+}
+// ======================================= ABOUTSECTION ===============================================
+
+export function AboutSection({
+  heading,
+  subheading,
+  content,
+  imageUrl,
+  fallbackImage,
+}) {
+  // const fallbackImage = "https://via.placeholder.com/400";
+  return (
+    <div className="about-container">
+      <div className="about-content">
+        <div className="about-heading">
+          <h1>{heading}</h1>
+        </div>
+        <div className="about-text">
+          <p>{subheading}</p>
+          <p>{content}</p>
+        </div>
+      </div>
+
+      <div className="about-image-wrapper">
+        <img
+          className="about-image"
+          src={imageUrl || fallbackImage}
+          alt="About Us"
+          loading="lazy"
+          width="400"
+          height="auto"
+        />
+      </div>
+    </div>
+  );
+}
+
+// ==========================================SECTION===================================================
+
+export const Section = ({ title, subtitle, cards }) => {
+  return (
+    <div className="section-container">
+      <div className="section-content">
+        <div className="section-heading">{title} </div>
+        <div className="section-sub-heading">{subtitle}</div>
+      </div>
+      <div className="card-container">
+        {cards.map((item, index) => (
+          <div className="section-card" key={index}>
+            <span className={`icon ${item.icon}`}>{item.icon} </span>{" "}
+            <div className="card-text">
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+//===========================================SERVICES==================================================
+
+export const OurServices = () => {
+  return (
+    <div className="services">
+      <div className="services-header">
+        <h2>Our Services</h2>
+        <p>We provide you simple and effective solutions.</p>
+      </div>
+      <div className="services-container">
+        <div className="services-grid">
+          {serviceData.map((service, index) => (
+            <div className="services-card" key={index}>
+              <div className="services-card-icon">
+                <Lottie className="servicesIcon" animationData={service.icon} />
+              </div>
+              <h3>{service.title}</h3>
+              <ul className="services-card-text">
+                {service.descriptions.map((desc, idx) => (
+                  <li key={idx}>{desc}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// ==========================================PORTFOLIO=================================================
+
+export const Portfolio = () => {
+  const [isHover, setIsHover] = useState(false);
+  return (
+    <div className="portfolio">
+      <div className="portfolio-container">
+        <div className="portfolio-header">
+          Projects we <br /> have <span>Completed </span>{" "}
+        </div>
+        <div className="portfolio-btn-container">
+          <button>
+            <Link to="/About">Start a new Project</Link>{" "}
+          </button>
+          <button>
+            {" "}
+            <Link to="/Portfolio">View All work</Link>
+          </button>
+        </div>
+      </div>
+
+      <div
+        className={`portfolio-card-container ${isHover ? "paused" : ""}`}
+        onMouseEnter={() => setIsHover(true)}
+        onMouseLeave={() => setIsHover(false)}
+      >
+        {portfolioData.map((item) => (
+          <div className="portfolio-card" key={item.id}>
+            <img
+              src={item.image}
+              alt={item.title}
+              loading="lazy"
+              className="portfolio-image"
+              // onError={(e) => {
+              //   e.target.src = "./assets/default.jpg";
+              // }} // Optional fallback image
+            />
+            <div className="card-details">
+              <h2 className="card-heading">{item.title}</h2>
+              <p className="card-about">{item.detail}</p>
+            </div>
+            <div className="card-link">
+              <a href={item.link} className="cardlinkto" target="_self">
+                <Addlink />
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+//===========================================TESTIMONIAL===============================================
+
+export const Testimonial = () => {
+  const swiperRef = useRef(null);
+
+  useEffect(() => {
+    const loadSwiper = () => {
+      const cssLink = document.createElement("link");
+      cssLink.rel = "stylesheet";
+      cssLink.href =
+        "https://cdn.jsdelivr.net/npm/swiper@latest/swiper-bundle.min.css";
+      document.head.appendChild(cssLink);
+
+      const script = document.createElement("script");
+      script.src =
+        "https://cdn.jsdelivr.net/npm/swiper@latest/swiper-bundle.min.js";
+      script.onload = () => {
+        swiperRef.current = new window.Swiper(".mySwiper", {
+          slidesPerView: 1,
+          loop: true,
+          spaceBetween: 12,
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+          },
+          navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          },
+          breakpoints: {
+            768: {
+              slidesPerView: 2,
+            },
+          },
+        });
+
+        // Automatic slide transition
+        const interval = setInterval(() => {
+          swiperRef.current.slideNext();
+        }, 500000);
+
+        return () => clearInterval(interval);
+      };
+      document.body.appendChild(script);
+    };
+
+    loadSwiper();
+
+    return () => {
+      const swiperScript = document.querySelector(
+        'script[src="https://cdn.jsdelivr.net/npm/swiper@latest/swiper-bundle.min.js"]'
+      );
+      if (swiperScript) {
+        document.body.removeChild(swiperScript);
+      }
+    };
+  }, []);
+
+  return (
+    <div className="testimonial-container">
+      <div className="testimonial-header">
+        What our <br />
+        <span>Satisfied clients</span> say
+      </div>
+      <div style={{ position: "relative" }}>
+        <div className="middle-rule">
+          <div className="rule rule-div"></div>
+          <div className="rule-div"></div>
+        </div>
+        <div className="swiper mySwiper">
+          <div className="swiper-wrapper testimonial-cards">
+            {testimonials.map((testimonial, index) => (
+              <div
+                className="swiper-slide testimonial-card"
+                key={testimonial.id}
+              >
+                <div className="testimonial-card-content">
+                  <div className="testimonial-card-image">
+                    <span>
+                      <span>{index % 2 === 0 ? <BlueQ/> : <PinkQ/>}</span>
+                    </span>
+                  </div>
+                  <div className="testimonial-card-text">
+                    <div className="testimonial-text-head">
+                      {testimonial.quote}
+                    </div>
+                    <div className="testimonial-text-para">
+                      {testimonial.text}
+                    </div>
+                    <div className="testimonial-detail">
+                      <div
+                        className="testimonial-details-image"
+                        style={{ backgroundImage: `url(${testimonial.image})` }}
+                      >
+                        {/* <img
+              src={testimonial.image}
+              alt={testimonial.index}
+              loading="lazy"
+                   className="testimonial-details-image"
+              ></img> */}
+                      </div>
+                      <div className="testimonial-details-name">
+                        <h4>{testimonial.name}</h4>
+                        <h5>{testimonial.location}</h5>
+                      </div>
+                    </div>
+                  </div>
+                </div>{" "}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      {/* Pagination and Navigation */}
+      <div className="dot-container">
+        <div className="swiperArrow">
+          <div className="swiper-pagination"></div>
+          <div className="swiper-button-prev swipe-left">
+            {/* <ArrowLeft /> */}
+          </div>
+          <div className="swiper-button-next swipe-right">
+            {/* <ArrowRight /> */}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// ---------------------------------------------FAQ----------------------------------------------------
+
+const FaqCard = ({ question, answer, isOpen, onToggle }) => (
+  <div className="faq-card">
+    <div className="faq-slide" onClick={onToggle}>
+      <div className="faq-card-text">{question}</div>
+      <div className="faq-card-icon">
+        {isOpen ? <CloseCircle /> : <AddCircle />}
+      </div>
+    </div>
+    {isOpen && (
+      <div className="faq-open">
+        <hr />
+        <div className="faq-query">
+          <p>{answer}</p>
+        </div>
+      </div>
+    )}
+  </div>
+);
+
+// ---------------------------------------------------------------------------------------------------
+
+export const Faq = () => {
+  const [openIndex, setOpenIndex] = useState(null);
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const handleToggle = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
+  const handleAskQuestion = () => {
+    setModalOpen(true);
+  };
+
+  const handleSendEmail = (email, subject, question) => {
+    console.log(
+      `Sending email to: ${email},Subject: ${subject} , Question: ${question}`
+    );
+  };
+
+  return (
+    <>
+      <div className="faq">
+        <div className="faq-head">
+          <div className="faq-heading">FAQ</div>
+          <div className="faq-text">
+            Can't find the answers you're looking for? Ask us and get answer in
+            24 hrs.
+          </div>
+          <button className="faq-button" onClick={handleAskQuestion}>
+            Ask a question
+          </button>
+        </div>
+        <div className="faq-content">
+          {faqs.map((faq, index) => (
+            <FaqCard
+              key={index}
+              question={faq.question}
+              answer={faq.answer}
+              isOpen={openIndex === index}
+              onToggle={() => handleToggle(index)}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="modal-overlay">
+        <Modal
+          isOpen={isModalOpen}
+          onClose={() => setModalOpen(false)}
+          onSend={handleSendEmail}
+        />
+      </div>
+    </>
+  );
+};
+
+//============================================FOOTER==================================================
 
 export const Footer = React.memo(() => {
   return (
@@ -994,8 +1008,9 @@ export const Footer = React.memo(() => {
           <Flogo />
          
         </div>
-        <div className="flogo-text"><LogoFF/>
-        {/* <Lottie animationData={FooterLogo} /> */}
+        <div className="flogo-text">
+        {/* <LogoFF/> */}
+        <Lottie animationData={FooterLogo} />
         </div>
         <ThemeToggle />
       </div>
@@ -1072,7 +1087,8 @@ export const Footer = React.memo(() => {
   );
 });
 
-//----------------------------------------------------------------------------------------
+//---------------------------------------------SEO----------------------------------------------------
+
 const SEO = ({ title, description, keywords }) => (
   <Helmet>
     <title>{title}</title>
@@ -1081,7 +1097,7 @@ const SEO = ({ title, description, keywords }) => (
   </Helmet>
 );
 
-// ========================================================================================
+// =======================================structuredData==============================================
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -1100,7 +1116,7 @@ const structuredData = {
   ],
 };
 
-//=======================================-MAIN HOME PAGE---==================================================================
+//=======================================-MAIN HOME PAGE---===========================================
 
 export const Home = () => {
   useEffect(() => {
