@@ -32,11 +32,11 @@ import { ReactComponent as BlueQ } from "../images/blue_.svg";
 import { ReactComponent as PinkQ } from "../images/pink_.svg";
 import { ReactComponent as LogoDark } from "../images/text (dark).svg";
 import { ReactComponent as LogoLight } from "../images/text (light).svg";
-// import { ReactComponent as LogoFF } from "../images/textz.svg";
+import { ReactComponent as LogoFF } from "../images/textz.svg";
 
 import Lottie from "lottie-react";
 // import Lottie from 'react-lottie';
-import FooterLogo from "../images/Main foot.json";
+// import FooterLogo from "../images/Main foot.json";
 import Animation from "../images/camera-hover-flash.json";
 import UiUx from "../images/video-conference-hover-pinch.json";
 import Saas from "../images/blinking.json";
@@ -820,7 +820,7 @@ export const Testimonial = () => {
         // Automatic slide transition
         const interval = setInterval(() => {
           swiperRef.current.slideNext();
-        }, 500000);
+        }, 5000);
 
         return () => clearInterval(interval);
       };
@@ -1009,8 +1009,8 @@ export const Footer = React.memo(() => {
          
         </div>
         <div className="flogo-text">
-        {/* <LogoFF/> */}
-        <Lottie animationData={FooterLogo} />
+        <LogoFF/>
+        {/* <Lottie animationData={FooterLogo} /> */}
         </div>
         <ThemeToggle />
       </div>

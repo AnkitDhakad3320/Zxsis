@@ -7,11 +7,13 @@ import { ReactComponent as ElementEleven } from "./About_Image/ElementEleven.svg
 export const Welcome = ({quote , header ,greet}) => {
     return (
         <div className="welcome">
-        <div className="about-greet">{quote}</div>
+        <div className="about-greet">{quote}
+        <div className="about-arrow"><AboutArrow className="in-svg"/></div>
+        <div className="element-eleven"><ElementEleven className="int-svg" /></div>
+        </div>
         <div className="about-tagline">{header} </div>
         <div className="about-greet-text">{greet}</div>
-        <div className="about-arrow"><AboutArrow/></div>
-        <div className="element-eleven"><ElementEleven/></div>
+      
         </div>
     )
 };
@@ -55,10 +57,10 @@ export const OurTeam = () => {
 export const Lastabout = ( ) => {
     return (
         <div className="last-about">
-            <div className="last-about-text">Join us on this <span>journey of creativity and success</span><br/> as we craft designs that are <span>not just beautiful</span>, but<br/> <span>also effective</span>.</div>
+            <div className="last-about-text">Join us on this <span>journey of creativity and success</span> as we craft designs that are <span>not just beautiful</span>, but <span>also effective</span>.</div>
             <div className="last-about-card-container">
                 <div className="last-about-card">
-                    <div className="last-about-card-head">Together</div>
+                    <div className="last-about-card-head">Together,</div>
                     <p>We can bring your concepts to life and elevate your brand in a competitive landscape.</p>
                 </div>
                 <div className="last-about-card">
@@ -71,7 +73,7 @@ export const Lastabout = ( ) => {
                 </div>
             </div>
         </div>
-    )}
+    )};
 
 export const About = ()=>{
     return (
