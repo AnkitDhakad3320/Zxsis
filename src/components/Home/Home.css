@@ -431,6 +431,7 @@ body.dark {
 .icon {
   width: 1.5rem;
   height: 1.5rem;
+  margin-right: 8px;
   stroke: var(--icon-strong, #0c111d);
   stroke-width: 0.0625rem;
 }
@@ -546,6 +547,7 @@ body.dark {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 3rem;
+  margin-top: 3rem;
   flex-wrap: nowrap;
 }
 
@@ -743,7 +745,7 @@ body.dark {
 }
 
 .testimonial-container {
-  margin: 6rem 6.75rem;
+  margin: 3rem 6.75rem;
   z-index: -1;
   height: 100%;
 }
@@ -837,7 +839,7 @@ body.dark {
 .faq {
   display: flex;
   flex-wrap: nowrap;
-  margin: 96px 6.75rem;
+  margin: 6rem 6.75rem;
   justify-content: space-between;
   gap: 2rem;
 }

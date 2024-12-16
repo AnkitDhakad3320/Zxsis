@@ -61,7 +61,6 @@
 .component-image {
   flex: 1 0 auto;
   background-color: var(--bg-white);
-  height: 548px;
   padding: 2rem 0rem 2rem 2rem;
   border: 1px solid var(--storke-soft);
   border-right: none;
@@ -84,7 +83,6 @@
   object-position: center;
   height: auto;
   flex:1 auto ;
-  /* width: 100%;  */
   display: block;
   overflow: hidden;
   position: relative;
@@ -108,18 +106,20 @@
 
 .forth-template-rev {
   margin-right: 28px;
+  position: relative;
+  
 }
 .rev-component-image {
   min-width: 480px;
   background-color: var(--bg-white);
-  height: 548px;
   padding: 2rem 2rem 2rem 0rem;
   border: 1px solid var(--storke-soft);
   border-right: none;
   border-radius: 0px 40px 40px 0px;
+  height: 100%;
+
 }
 
-/* Responsive Styles */
 @media (max-width: 1024px) {
   .service-welcome {
     padding: 180px 24px; 
@@ -144,7 +144,6 @@
   .rev-component-image {
     min-width: 100%;
     height: 100%;
-    padding: 1rem 2rem;
   }
 }
 
@@ -167,18 +166,21 @@
   .forth-template, .forth-template-rev  {
     flex-direction: column; 
   }
-  /* .service-section {
+  .forth-template-rev .service-section {
+    margin-left: 28px;
+  }
+  .forth-template .service-section {
     margin-right: 28px;
-  } */
+  }
 }
 
 @media (max-width: 480px) {
   .service-welcome {
-    padding: 40px 16px;
+    padding:86px 28px 40px;
   }
 
   .service-tagline {
-    font-size: 28px;
+    font-size: 24px;
     line-height: 36px;
   }
 
