@@ -59,7 +59,7 @@ import image5 from "../images/image.jpg";
 
 // ======================================DATA====================================================
 
-const cardData = [
+export const cardData = [
   {
     icon: <Palette />,
     title: "Color System",
@@ -676,14 +676,14 @@ export function AboutSection({
 
 // ==========================================SECTION===================================================
 
-export const Section = ({ title, subtitle, cards }) => {
+export const Section = ({ title, subtitle, cards ,titleStyle,container }) => {
   return (
-    <div className="section-container">
-      <div className="section-content">
+    <>
+      <div className="section-content"style={titleStyle}>
         <div className="section-heading">{title} </div>
-        <div className="section-sub-heading">{subtitle}</div>
+        <div className="section-sub-heading" >{subtitle}</div>
       </div>
-      <div className="card-container">
+      <div className={container}>
         {cards.map((item, index) => (
           <div className="section-card" key={index}>
             <span className={`icon ${item.icon}`}>{item.icon} </span>{" "}
@@ -694,7 +694,7 @@ export const Section = ({ title, subtitle, cards }) => {
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 };
 
@@ -1196,7 +1196,7 @@ export const Home = () => {
               imageUrl="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&q=80&w=400"
             />
           </section>
-          <section>
+          <section className="section-container">
             <Section
               title={
                 <span>
@@ -1204,6 +1204,7 @@ export const Home = () => {
                 </span>
               }
               subtitle="We've got you covered."
+              container="card-container"
               cards={cardData}
             />
           </section>

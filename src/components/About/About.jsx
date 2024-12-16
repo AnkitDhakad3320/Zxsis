@@ -54,10 +54,10 @@ export const OurTeam = () => {
     )
 };
 
-export const Lastabout = ( ) => {
+export const Lastabout = ({setStyle}) => {
     return (
         <div className="last-about">
-            <div className="last-about-text">Join us on this <span>journey of creativity and success</span> as we craft designs that are <span>not just beautiful</span>, but <span>also effective</span>.</div>
+            <div className="last-about-text" style={setStyle} >Join us on this <span>journey of creativity and success</span> as we craft designs that are <span>not just beautiful</span>, but <span>also effective</span>.</div>
             <div className="last-about-card-container">
                 <div className="last-about-card">
                     <div className="last-about-card-head">Together,</div>
