@@ -7,6 +7,7 @@ import { About } from "./components/About/About";
 import { Home } from "./components/Home/Home";
 import NoPage from "./components/NoPage/NoPage";
 import { Services } from "./components/Services/Services";
+import { Quote } from "./components/get_a_quote/Quote";
 
 function App() {
   return (
@@ -20,9 +21,8 @@ function App() {
           <Route path="/services" element={<Services />} />
           {/* <Route path="/Portfolio" element={<Portfolio />} /> */}
           {/* <Route path="/Blog" element={<Blog />} /> */}
+          <Route path="/quote" element={<Quote/>} />
           <Route path="*" element={<NoPage/>} />
-
-          {/* <Route path="/services" element={<Services/>}/>*/}
         </Routes>
         </ThemeProvider>
       </BrowserRouter>

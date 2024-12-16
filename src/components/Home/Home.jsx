@@ -289,7 +289,7 @@ const faqs = [
 
 //=======================================MODAL=====================================================
 
-const Modal = ({ isOpen, onClose }) => {
+const Modal = ({ isOpen, onClose ,modal , cross}) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -379,7 +379,7 @@ const Modal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="modal">
+    <div className={modal  || "modal"}>
       <form onSubmit={handleSend}>
         <div className="modal-content">
           <header className="modal-content-header">
@@ -387,7 +387,7 @@ const Modal = ({ isOpen, onClose }) => {
               <h2>Get in Touch</h2>
               <p>You can reach us any time</p>
             </div>
-            <button type="button" className="cross" onClick={onClose}>
+            <button type="button" className={cross||"cross"} onClick={onClose}>
               <CloseCircle></CloseCircle>
             </button>
           </header>
@@ -472,7 +472,7 @@ const Modal = ({ isOpen, onClose }) => {
 };
 export default Modal;
 
-// LottieComponent for Background Animation
+//================================ LottieComponent for Background Animation======================
 
 export const LottieComponent = React.memo(() => {
   const animationSpeed = 0.2;
@@ -491,19 +491,19 @@ export const LottieComponent = React.memo(() => {
 });
 
 
-// Memoized Nav component
+// ================================Nav component==============================================
 
-export const Nav = React.memo((handleSendEmail) => {
-  const [isModalOpen, setModalOpen] = useState(false);
+export const Nav = React.memo(() => {
+  // const [isModalOpen, setModalOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
   const { isDarkMode } = useTheme();
 
   // const location = useLocation();
   // const isActive = (path) => location.pathname === path;
 
-  const handleAskQuestion = useCallback(() => {
-    setModalOpen(true);
-  }, []);
+  // const handleAskQuestion = useCallback(() => {
+  //   setModalOpen(true);
+  // }, []);
 
   const toggleMenu = useCallback(() => {
     setMenuOpen((prev) => !prev);
@@ -541,7 +541,7 @@ export const Nav = React.memo((handleSendEmail) => {
       <div className="nav-container">
         <div className="nav-logo">
           <div className="logo-icon">
-            <Lottie animationData={Zx} />
+            <Lottie animationData={Zx}/>
           </div>
           {isDarkMode ? <LogoDark />:<LogoLight/>}
         </div>
@@ -564,13 +564,14 @@ export const Nav = React.memo((handleSendEmail) => {
               {item}
             </Link>
           ))}
+          <Link to="/Quote">
           <button
             className="quote-button"
-            onClick={handleAskQuestion}
             aria-label="Get a Quote"
           >
             Get a Quote
           </button>
+          </Link>
         </div>
         <div className="menu">
           <button
@@ -597,26 +598,18 @@ export const Nav = React.memo((handleSendEmail) => {
               {item}
             </Link>
           ))}
+          <Link  to="/quote">
           <button
             className="menu-quote-button"
             onClick={() => {
               toggleMenu();
-              handleAskQuestion();
             }}
           >
             Get a Quote
           </button>
+          </Link>
         </div>
       )}
-
-      <div className="navModal">
-        <Modal
-          className="navModal"
-          isOpen={isModalOpen}
-          onClose={() => setModalOpen(false)}
-          onSend={handleSendEmail}
-        />
-      </div>
     </nav>
   );
 });
