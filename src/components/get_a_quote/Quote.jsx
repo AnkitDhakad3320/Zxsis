@@ -120,10 +120,10 @@ export const Contacts = () => {
       <div className="contacts-header">
       <div className="contacts-head">Contacts</div>
       <div className="contacts-subhead">INFO@ZXSIS.COM</div>
-      <div className="contacts-follow">
+      {/* <div className="contacts-follow">
         <div>Follow</div>
         <div></div>
-      </div>
+      </div> */}
       </div>
       <div className="contacts-form">
       <form onSubmit={handleSend}>

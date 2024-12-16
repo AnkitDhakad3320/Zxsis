@@ -598,7 +598,7 @@ export const Nav = React.memo(() => {
               {item}
             </Link>
           ))}
-          <Link  to="/quote">
+          <Link style={{width:"100%"}}  to="/quote">
           <button
             className="menu-quote-button"
             onClick={() => {
